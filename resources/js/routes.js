@@ -1,8 +1,8 @@
-import ExampleComponent from './components/ExampleComponent.vue';
+import Terminal from './components/Terminal.vue';
 
 export const routes = [
     {
-        path: '/example',
-        component: ExampleComponent
+        path: '/terminal',
+        component: Terminal
     }
 ];  
