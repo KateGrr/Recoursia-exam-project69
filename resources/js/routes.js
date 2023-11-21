@@ -1,8 +1,8 @@
-import Terminal from './components/Terminal.vue';
+import Postamat from './components/Postamat.vue';
 
 export const routes = [
     {
-        path: '/terminal',
-        component: Terminal
+        path: '/postamat',
+        component: Postamat
     }
 ];  
