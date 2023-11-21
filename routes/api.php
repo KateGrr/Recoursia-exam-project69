@@ -14,6 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/all', function () {
+    $postamats = [
+        [
+        'id' => 1,
+        'status' => 1,
+        'system_id' => 'PST0001',
+        'address' => 'Abay st., 102',
+        'serial_number' => 'S123456789',
+        'created_at' => '01.01.2023',
+        'updated_at' => '02.02.2023'
+        ]
+    ];
+
+    return response()->json([
+        'status' => true,
+        'message' => 'Success',
+        'postamats' => $postamats
+    ], 200);
 });

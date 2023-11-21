@@ -12,7 +12,7 @@
                         <router-link to="/" class="nav-link active" aria-current="page" href="#">Home</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link to="/terminal" class="nav-link" href="#">Terminal</router-link>
+                        <router-link to="/postamat" class="nav-link" href="#">Postamat</router-link>
                     </li>
                 </ul>    
             </div>
