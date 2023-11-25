@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/all', [PostamatsController::class, 'index']);
+Route::post('/create', [PostamatsController::class, 'create']);
