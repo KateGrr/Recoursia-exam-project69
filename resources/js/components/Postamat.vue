@@ -9,6 +9,14 @@
                 <th scope="col">Serial number</th>
                 <th scope="col">Created</th>
                 <th scope="col">Updated</th>
+                <th class="float-right">
+                    <button type="button" class="btn-sm btn btn-light" >
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                    <button type="button" class="btn-sm btn btn-light" @click="deleted" data-mdb-ripple-init>
+                        <i class="fa-solid fa-eraser"></i>
+                    </button>
+                </th>
             </tr>
         </thead>
         <tbody>
