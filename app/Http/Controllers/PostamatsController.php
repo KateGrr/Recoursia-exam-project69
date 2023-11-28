@@ -36,4 +36,22 @@ class PostamatsController extends Controller
             'postamats' => $postamats 
         ], 200);
     }
+
+    public function edit(Request $request): JsonResponse
+    {
+        Postamat::find($request->id)->update([
+            'status' => $request->status,
+            'system_id' => $request->system_id,
+            'address' => $request->address,
+            'serial_number' => $request->serial_number
+        ]);
+
+        $postamats = Postamat::all();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Postamat successfully updated',
+            'postamats' => $postamats 
+        ], 200);
+    }
 }
