@@ -32,7 +32,7 @@ class PostamatsController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => 'Postamat successfully added!',
+            'message' => 'Postamat successfully added',
             'postamats' => $postamats 
         ], 200);
     }
@@ -51,6 +51,19 @@ class PostamatsController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Postamat successfully updated',
+            'postamats' => $postamats 
+        ], 200);
+    }
+
+    public function delete(Request $request): JsonResponse
+    {
+        Postamat::find($request->id)->delete();
+
+        $postamats = Postamat::all();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Postamat successfully delete',
             'postamats' => $postamats 
         ], 200);
     }

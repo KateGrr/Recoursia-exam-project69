@@ -28,8 +28,10 @@
                         <td>{{ postamat.created_at }}</td>
                         <td>{{ postamat.updated_at }}</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('edit', postamat)"> <i class="fa-regular fa-pen-to-square"></i></button>
-                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('delete')"><i class="fas fa-trash"></i></button> 
+                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('edit', postamat)"> <i
+                                    class="fa-regular fa-pen-to-square"></i></button>
+                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('delete', postamat)"><i
+                                    class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -146,6 +148,17 @@
             <MDBBtn color="primary" @click="save('edit')">Save</MDBBtn>
         </MDBModalFooter>
     </MDBModal>
+
+    <MDBModal id="deleteModal" tabindex="-1" labelledby="deleteModalLabel" v-model="deleteModal">
+        <MDBModalHeader>
+            <MDBModalTitle id="deleteModalLabel"> Delete postamat </MDBModalTitle>
+        </MDBModalHeader>
+        <MDBModalBody>Are you sure?</MDBModalBody>
+        <MDBModalFooter>
+            <MDBBtn color="primary" @click="save('delete')"><i class="fa-solid fa-check"></i></MDBBtn>
+            <MDBBtn color="secondary" @click="showModal('delete')"><i class="fa-solid fa-xmark"></i></MDBBtn>
+        </MDBModalFooter>
+    </MDBModal>
 </template>
 
 <script>
@@ -172,6 +185,7 @@
                 postamats: [],
                 createModal: false,
                 editModal: false,
+                deleteModal: false,
                 newObject: {
                     status: 0,
                     system_id: null,
@@ -199,19 +213,42 @@
             showModal: function (modal, postamat = null) {
                 if (modal == 'create') {
                     this.createModal = !this.createModal;
-                } else if(modal == 'edit') {
-                   this.editModal = !this.editModal;
-                   if (postamat != null) {
-                    this.currentPostamat = postamat;
-                   }
+                } else if (modal == 'edit') {
+                    this.editModal = !this.editModal;
+                    if (postamat != null) {
+                        this.currentPostamat = postamat;
+                    }
+                } else if (modal == 'delete') {
+                    this.deleteModal = !this.deleteModal;
+                    if (postamat != null) {
+                        this.currentPostamat = postamat;
+                    }
                 }
             },
 
-            save: function (modal) {
-                console.log(this.newObject);
+
+
+            save: function(modal) {
                 let vue = this;
                 if (modal == 'create') {
                     axios.post('/api/create', vue.newObject)
+                        .then(function (response) {
+                            if (response.data.status) {
+                                vue.postamats = response.data.postamats;
+                                vue.showModal(modal);
+                                vue.newObject = {
+                                    status: 0,
+                                    system_id: null,
+                                    address: null,
+                                    serial_number: null
+                                };
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                } else if (modal == 'edit') {
+                    axios.post('/api/edit', vue.currentPostamat)
                         .then(function (response) {
                             if (response.data.status) {
                                 vue.postamats = response.data.postamats;
@@ -221,18 +258,20 @@
                         .catch(function (error) {
                             console.log(error);
                         });
-                } else if (modal == 'edit') {
-                    axios.post('/api/edit', vue.currentPostamat)
-                    .then(function(response) {
-                        if (response.data.status) {
-                            vue.postamats = response.data.postamats;
-                            vue.showModal(modal);
-                        }
-                    })
-                    .catch(function(error) {
-                        console.log(error);
-                    });
-                }
+                } 
+                else if (modal == 'delete') {
+                   console.log(this.currentPostamat);
+                    axios.post('/api/delete', vue.currentPostamat)
+                        .then(function (response) {
+                            if (response.data.status) {
+                                vue.postamats = response.data.postamats;
+                                vue.showModal(modal);
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+               }
             }
         }
     }

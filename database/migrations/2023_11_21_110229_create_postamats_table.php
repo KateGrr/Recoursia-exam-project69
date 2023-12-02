@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('address', 255);
             $table->string('serial_number', 10);
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 
