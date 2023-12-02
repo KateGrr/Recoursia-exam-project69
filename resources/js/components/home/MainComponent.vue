@@ -1,0 +1,63 @@
+<template>
+    <title>Home</title>
+    <main>
+        <section class="why-us">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <h2 class="mt-5 text-center">Three-stage exam Recoursia 69</h2>
+                        <p class="mb-5 text-center">Project on PHP(Laravel), Vue.js, Bootstrap</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="box">
+                            <span>Recycler</span>
+                            <h4>Name</h4>
+                            <p>There are many variations of passages of available, but the majority have suffered alteration in some form</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="box">
+                            <span>Terminal</span>
+                            <h4>Name</h4>
+                            <p>There are many variations of Lorem Ipsum available, but the majority have suffered alteration in some form</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="box">
+                            <span>Postamat</span>
+                            <h4>Name</h4>
+                            <p>There are many variations of Lorem Ipsum available, but the majority have suffered alteration in some form</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="box">
+                            <span>Posterminal</span>
+                            <h4>Aliev Eldar</h4>
+                            <p>There are many variations of passages of Lorem Ipsum available, the majority have suffered alteration in some form</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="box">
+                            <span class="">Cardomat</span>
+                            <h4>Name</h4>
+                            <p>There are many of passages of Lorem Ipsum available, but the majority have suffered alteration in some form</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</template>
+
+<script>
+    export default {
+        name: 'mainComponent',
+    }
+</script>
