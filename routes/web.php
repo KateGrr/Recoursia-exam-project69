@@ -13,4 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'App\Http\Controllers\IndexController');
+Route::get('/', function () {
+    return view('layouts.index');
+});
+

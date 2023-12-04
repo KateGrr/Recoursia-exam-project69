@@ -2,7 +2,7 @@
     <title>Posterminal</title>
     <main class="mt-5 d-flex flex-column align-items-center">
         <ModalErrorComponent ref="modalError"></ModalErrorComponent>
-        <ModalConfirmConponent ref="modalConfirm"></ModalConfirmConponent>
+        <ModalConfirmComponent ref="modalConfirm"></ModalConfirmComponent>
         <ModalInputComponent ref="modalInput"></ModalInputComponent>
         <TableComponent ref="table"></TableComponent>
     </main>
@@ -10,7 +10,7 @@
 
 <script>
     import ModalErrorComponent from './ModalErrorComponent.vue';
-    import ModalConfirmConponent from './ModalConfirmComponent.vue';
+    import ModalConfirmComponent from './ModalConfirmComponent.vue';
     import ModalInputComponent from './ModalInputComponent.vue';
     import TableComponent from './TableComponent.vue';
 
@@ -18,7 +18,7 @@
         name: 'MainComponent',
         components: {
             ModalErrorComponent,
-            ModalConfirmConponent,
+            ModalConfirmComponent,
             ModalInputComponent,
             TableComponent
         }
