@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostamatsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/all', [PostamatsController::class, 'index']);
+Route::post('/create', [PostamatsController::class, 'create']);
+Route::post('/edit', [PostamatsController::class,'edit']);
+Route::post('/delete', [PostamatsController::class,'delete']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
