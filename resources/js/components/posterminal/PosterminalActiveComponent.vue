@@ -1,5 +1,4 @@
 <template>
-    <title>Posterminal</title>
     <main class="mt-5 d-flex flex-column align-items-center">
         <ModalErrorComponent ref="modalError"></ModalErrorComponent>
         <ModalConfirmComponent ref="modalConfirm"></ModalConfirmComponent>
@@ -15,7 +14,7 @@
     import TableComponent from './TableComponent.vue';
 
     export default {
-        name: 'MainComponent',
+        name: 'PosterminalActiveComponent',
         components: {
             ModalErrorComponent,
             ModalConfirmComponent,
