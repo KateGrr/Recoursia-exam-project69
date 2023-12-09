@@ -1,5 +1,5 @@
 <template>
-    <h1 class="display-6">Defective postamats</h1>
+    <h1 class="h1">Defective postamats</h1>
     <main class="mt-4 d-flex flex-column align-items-center">
         <div class="col-sm-12">
             <table class="table">
@@ -35,87 +35,193 @@
             </table>
         </div>
     </main>
-</template>  
+    <MDBModal id="createModal" tabindex="-1" labelledby="createModalLabel" v-model="createModal">
+        <MDBModalHeader>
+            <MDBModalTitle id="createModalLabel"> Add defect </MDBModalTitle>
+        </MDBModalHeader>
+        <MDBModalBody>
+            <form id="form">
+                <div class="mb-3">
+                    <div class="row mt-4">
+                        <label for="title" class="col-sm-4 col-form-label fs-5">Title</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="title" v-model="newObject.title">
+                        </div>
+                    </div>
+
+                    <div class="row mt-4 mb-4">
+                        <label for="description" class="col-sm-4 col-form-label fs-5">Description</label>
+                        <div class="col-sm-8">
+                            <textarea type="text" class="form-control textarea1" id="description" v-model="newObject.description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </MDBModalBody>
+        <MDBModalFooter>
+            <MDBBtn color="secondary" @click="showModal('create')">Close</MDBBtn>
+            <MDBBtn color="primary" @click="save('create')">Save</MDBBtn>
+        </MDBModalFooter>
+    </MDBModal>
+
+    <MDBModal id="editModal" tabindex="-1" labelledby="editModalLabel" v-model="editModal">
+        <MDBModalHeader>
+            <MDBModalTitle id="editModalLabel"> Edit defect </MDBModalTitle>
+        </MDBModalHeader>
+        <MDBModalBody>
+
+            <form id="form">
+                <div class="mb-3">
+                    <div class="row mt-4">
+                        <label for="title" class="col-sm-4 col-form-label fs-5">Title</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="title" v-model="newObject.title">
+                        </div>
+                    </div>
+
+                    <div class="row mt-4 mb-4">
+                        <label for="description" class="col-sm-4 col-form-label fs-5">Description</label>
+                        <div class="col-sm-8">
+                            <textarea type="text" class="form-control textarea1" id="description" v-model="newObject.description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </MDBModalBody>
+        <MDBModalFooter>
+            <MDBBtn color="secondary" @click="showModal('edit')">Close</MDBBtn>
+            <MDBBtn color="primary" @click="save('edit')">Save</MDBBtn>
+        </MDBModalFooter>
+    </MDBModal>
+
+    <MDBModal id="deleteModal" tabindex="-1" labelledby="deleteModalLabel" v-model="deleteModal">
+        <MDBModalHeader>
+            <MDBModalTitle id="deleteModalLabel"> Delete defect </MDBModalTitle>
+        </MDBModalHeader>
+        <MDBModalBody>Are you sure?</MDBModalBody>
+        <MDBModalFooter>
+            <MDBBtn color="primary" @click="save('delete')"><i class="fa-solid fa-check"></i></MDBBtn>
+            <MDBBtn color="secondary" @click="showModal('delete')"><i class="fa-solid fa-xmark"></i></MDBBtn>
+        </MDBModalFooter>
+    </MDBModal>
+</template>
 
 <script>
     import axios from 'axios';
+    import {
+        MDBModal,
+        MDBModalHeader,
+        MDBModalTitle,
+        MDBModalBody,
+        MDBModalFooter,
+        MDBBtn,
+    } from 'mdb-vue-ui-kit';
 
     export default {
-    
-    data() {
-        return {
-            defectives: [],
-            createModal: false,
-            editModal: false,
-            deleteModal: false,
-            newObject: {
-                status: 0,
-                system_id: null,
-                address: null,
-                serial_number: null
-            },
-            currentDefective: {}
-        };
-    },
+        components: {
+            MDBModal,
+            MDBModalHeader,
+            MDBModalTitle,
+            MDBModalBody,
+            MDBModalFooter,
+            MDBBtn,
+        },
 
-    mounted() {
-        let vue = this;
-        axios.get('/api/defective')
-            .then(function (response) {
-                if (response.data.status) {
-                    vue.defectives = response.data.defectives;
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    },
+        data() {
+            return {
+                defectives: [],
+                createModal: false,
+                editModal: false,
+                deleteModal: false,
+                newObject: {
+                    status: 0,
+                    system_id: null,
+                    title: null,
+                    description: null
+                },
+                currentDefective: {}
+            };
+        },
 
-    save: function(modal) {
+        mounted() {
             let vue = this;
-            if (modal == 'create') {
-                axios.post('/api/defective/create', vue.newObject)
-                    .then(function (response) {
-                        if (response.data.status) {
-                            vue.defectives = response.data.defectives;
-                            vue.showModal(modal);
-                            vue.newObject = {
-                                status: 0,
-                                system_id: null,
-                                address: null,
-                                serial_number: null
-                            };
-                        }
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            } else if (modal == 'edit') {
-                axios.post('/api/defective/edit', vue.currentDefective)
-                    .then(function (response) {
-                        if (response.data.status) {
-                            vue.defectives = response.data.defectives;
-                            vue.showModal(modal);
-                        }
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            } 
-            else if (modal == 'delete') {
-               console.log(this.currentDefective);
-                axios.post('/api/defective/delete', vue.currentDefective)
-                    .then(function (response) {
-                        if (response.data.status) {
-                            vue.defectives = response.data.defectives;
-                            vue.showModal(modal);
-                        }
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-           }
+            axios.get('/api/postamat/defective/all')
+                .then(function (response) {
+                    if (response.data.status) {
+                        vue.postamats = response.data.defectives;
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+
+        methods: {
+            showModal: function (modal, defective = null) {
+                if (modal == 'create') {
+                    this.createModal = !this.createModal;
+                } else if (modal == 'edit') {
+                    this.editModal = !this.editModal;
+                    if (defective != null) {
+                        this.currentDefective = defective;
+                    }
+                } else if (modal == 'delete') {
+                    this.deleteModal = !this.deleteModal;
+                    if (defective != null) {
+                        this.currentDefective = defective;
+                    }
+                }
+            },
+
+
+
+            save: function (modal) {
+                let vue = this;
+                if (modal == 'create') {
+                    axios.post('/api/postamat/defective/create', vue.newObject)
+                        .then(function (response) {
+                            if (response.data.status) {
+                                vue.defectives = response.data.defectives;
+                                vue.showModal(modal);
+                                vue.newObject = {
+                                    status: 0,
+                                    system_id: null,
+                                    title: null,
+                                    description: null
+                                };
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                } else if (modal == 'edit') {
+                    axios.post('/api/postamat/defective/edit', vue.currentDefective)
+                        .then(function (response) {
+                            if (response.data.status) {
+                                vue.defectives = response.data.defectives;
+                                vue.showModal(modal);
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                } else if (modal == 'delete') {
+                    console.log(this.currentDefective);
+                    axios.post('/api/postamat/defective/delete', vue.currentDefective)
+                        .then(function (response) {
+                            if (response.data.status) {
+                                vue.defectives = response.data.defectives;
+                                vue.showModal(modal);
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
+            }
         }
-    
-}
-</script> 
+    }
+
+</script>

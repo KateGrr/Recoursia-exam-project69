@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Postamat;
 
+use App\Http\Controllers\Controller;
 use App\Models\Postamat;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

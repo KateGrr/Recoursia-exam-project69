@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="{{ asset('css/nav.css') }}">
         <link rel="stylesheet" href="{{ asset('css/home/content.css') }}">
         <link rel="stylesheet" href="{{ asset('css/posterminal/modalMDB.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/postamat/postamat.css') }}">
     </head>
     <body id="app">
     </body>
