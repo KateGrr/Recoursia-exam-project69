@@ -1,6 +1,6 @@
 <?php
 use App\Http\Controllers\CardomatController;
-use App\Http\Controllers\PostamatsController;
+use App\Http\Controllers\Postamat\PostamatsController;
 use App\Http\Controllers\posterminalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,15 +25,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group(['namespace' => 'App\Http\Controllers\Postamat'], function() {
+    Route::get('/postamat/all', [PostamatsController::class, 'index']);
+    Route::post('/postamat/create', [PostamatsController::class, 'create']);
+    Route::post('/postamat/edit', [PostamatsController::class,'edit']);
+    Route::post('/postamat/delete', [PostamatsController::class,'delete']);
 
-Route::get('/postamat/all', [PostamatsController::class, 'index']);
-Route::post('/postamat/create', [PostamatsController::class, 'create']);
-Route::post('/postamat/edit', [PostamatsController::class,'edit']);
-Route::post('/postamat/delete', [PostamatsController::class,'delete']);
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::get('/postamat/defective/all', [DefectiveController::class, 'index']);
+    Route::post('/postamat/defective/create', [DefectiveController::class, 'create']);
+    Route::post('/postamat/defective/edit', [DefectiveController::class, 'edit']);
+    Route::post('/postamat/defective/delete', [DefectiveController::class, 'delete']);
 });
-Route::get('/postamat/defective', [DefectiveController::class, 'index']);
 
 Route::group(['namespace' => 'App\Http\Controllers\Posterminal'], function() {
     Route::post('posterminal/showExisting',    'ShowExistingController');

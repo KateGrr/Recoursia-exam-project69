@@ -3,16 +3,18 @@
 namespace App\Http\Controllers\Postamat;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Postamat\StoreRequest;
 use App\Models\Postamat;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class PostamatsController extends Controller
 {
+
     public function index(): JsonResponse
     {
         $postamats = Postamat::all();
-        
+
         return response()->json([
             'status' => true,
             'message' => 'Success',
@@ -20,16 +22,11 @@ class PostamatsController extends Controller
         ], 200);
     }
 
-    public function create(Request $request): JsonResponse
+    public function create(StoreRequest $request): JsonResponse
     {
-        Postamat::create([
-            'status' => $request->status,
-            'system_id' => $request->system_id,
-            'address' => $request->address,
-            'serial_number' => $request->serial_number
-        ]);
+        $request = $request->validated();
 
-        $postamats = Postamat::all();
+        $postamats = Postamat::create($request);
 
         return response()->json([
             'status' => true,
@@ -38,8 +35,10 @@ class PostamatsController extends Controller
         ], 200);
     }
 
-    public function edit(Request $request): JsonResponse
+    public function edit(StoreRequest $request): JsonResponse
     {
+        $request = $request->validated();
+
         Postamat::find($request->id)->update([
             'status' => $request->status,
             'system_id' => $request->system_id,

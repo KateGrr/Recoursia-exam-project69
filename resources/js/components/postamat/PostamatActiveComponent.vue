@@ -1,5 +1,5 @@
 <template>
-    <h1 class="h1">Active postmats</h1>
+    <h1 class="h1">Active postamats</h1>
     <main class="mt-4 d-flex flex-column align-items-center">
         <div class="col-sm-12">
             <table class="table">
@@ -200,7 +200,7 @@
 
         mounted() {
             let vue = this;
-            axios.get('/api/postamat/all')
+            axios.get('/api/postamat/index')
                 .then(function (response) {
                     if (response.data.status) {
                         vue.postamats = response.data.postamats;
@@ -236,7 +236,7 @@
                     axios.post('/api/postamat/create', vue.newObject)
                         .then(function (response) {
                             if (response.data.status) {
-                                vue.postamats = response.data.postamats;
+                                vue.cards = response.data.cards;
                                 vue.showModal(modal);
                                 vue.newObject = {
                                     status: 0,
@@ -251,15 +251,15 @@
                         });
                 } else if (modal == 'edit') {
                     axios.post('/api/postamat/edit', vue.currentPostamat)
-                        .then(function (response) {
-                            if (response.data.status) {
-                                vue.postamats = response.data.postamats;
-                                vue.showModal(modal);
-                            }
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
+                    .then(function(response) {
+                        if (response.data.status) {
+                            vue.cards = response.data.cards;
+                            vue.showModal(modal);
+                        }
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
                 } else if (modal == 'delete') {
                     console.log(this.currentPostamat);
                     axios.post('/api/postamat/delete', vue.currentPostamat)

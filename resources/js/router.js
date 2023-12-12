@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory} from 'vue-router';
+import { createRouter, createWebHistory} from 'vue-router';
 
 import HomeComponent from './components/home/HomeComponent.vue';
 
@@ -29,7 +29,7 @@ import PostamatDefectiveComponent from './components/postamat/PostamatDefectiveC
 // import CardomatDeletedComponent from './components/cardomat/CardomatDeletedComponent.vue';
 
 export default createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes: [
         { path: '/', component: HomeComponent, alias: '/' },
 
