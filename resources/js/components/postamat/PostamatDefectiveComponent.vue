@@ -20,7 +20,7 @@
                 <tbody>
                     <tr v-for="(defective, key) of defectives" :key="key">
                         <td>{{ defective.id }}</td>
-                        <td>{{ defective.titles }}</td>
+                        <td>{{ defective.title }}</td>
                         <td>{{ defective.description }}</td>
                         <td>{{ defective.created_at }}</td>
                         <td>{{ defective.updated_at }}</td>
@@ -137,7 +137,6 @@
                 deleteModal: false,
                 newObject: {
                     status: 0,
-                    system_id: null,
                     title: null,
                     description: null
                 },
@@ -147,10 +146,10 @@
 
         mounted() {
             let vue = this;
-            axios.get('/api/postamat/defective/all')
+            axios.get('/api/postamat/defective/index')
                 .then(function (response) {
                     if (response.data.status) {
-                        vue.postamats = response.data.defectives;
+                        vue.defectives = response.data.defectives;
                     }
                 })
                 .catch(function (error) {
@@ -187,7 +186,6 @@
                                 vue.showModal(modal);
                                 vue.newObject = {
                                     status: 0,
-                                    system_id: null,
                                     title: null,
                                     description: null
                                 };

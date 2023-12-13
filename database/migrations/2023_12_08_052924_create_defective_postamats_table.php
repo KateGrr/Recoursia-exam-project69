@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('defectives', function (Blueprint $table) {
+        Schema::create('defective_postamats', function (Blueprint $table) {
             $table->id();
             $table->boolean('active')->default(true);
-            $table->string('title', 50);
-            $table->string('description', 255);
+            $table->string('title', 50)->nullable();
+            $table->string('description', 255)->nullable();
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('defectives');
+        Schema::dropIfExists('defective_postamats');
     }
 };
