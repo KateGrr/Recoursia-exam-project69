@@ -67,6 +67,7 @@
                             id</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="system_id" v-model="newObject.system_id">
+                            <div class="row-sm-4 text-danger" > {{ error.system_id}} </div>
                         </div>
                     </div>
 
@@ -74,6 +75,7 @@
                         <label for="address" class="col-sm-4 col-form-label fs-5">Address</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="address" v-model="newObject.address">
+                            <div class="row-sm-2 text-danger" > {{ error.address}} </div>
                         </div>
                     </div>
 
@@ -82,6 +84,7 @@
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="serial_number"
                                 v-model="newObject.serial_number">
+                            <div class="row-sm-2 text-danger" > {{ error.serial_number}} </div>
                         </div>
                     </div>
                 </div>
@@ -194,7 +197,8 @@
                     address: null,
                     serial_number: null
                 },
-                currentPostamat: {}
+                currentPostamat: {},
+                error: {},
             };
         },
 
@@ -246,7 +250,10 @@
                                 };
                             }
                         })
-                        .catch(function (error) {
+                        .catch((error) => {
+                            for (let field in error.response.data.errors) {
+                                this.error[field] = error.response.data.errors[field][0];
+                            };
                             console.log(error);
                         });
                 } else if (modal == 'edit') {
