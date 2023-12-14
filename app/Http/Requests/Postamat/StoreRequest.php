@@ -39,7 +39,7 @@ class StoreRequest extends FormRequest
         'serial_number.unique' => 'This serial_number has already been taken',
         'system_id.size' => 'system_id must be 8 characters',
         'serial_number.size' => 'serial_number must be 10 characters',
-        'address.size' => 'address must be less than 255 characters',
+        'address.max' => 'address must be less than 255 characters',
         'system_id.regex' => 'system_id must match the template "PST12345"',
         'serial_number.regex' => 'serial_number must match the template "S123456789"',
     ];

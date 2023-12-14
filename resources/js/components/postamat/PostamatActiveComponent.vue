@@ -125,6 +125,7 @@
                             id</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="system_id" v-model="currentPostamat.system_id">
+                            <div class="row-sm-4 text-danger" > {{ error.system_id }} </div>
                         </div>
                     </div>
 
@@ -132,6 +133,7 @@
                         <label for="address" class="col-sm-4 col-form-label fs-5">Address</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="address" v-model="currentPostamat.address">
+                            <div class="row-sm-4 text-danger" > {{ error.address }} </div>
                         </div>
                     </div>
 
@@ -140,6 +142,7 @@
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="serial_number"
                                 v-model="currentPostamat.serial_number">
+                                <div class="row-sm-4 text-danger" > {{ error.serial_number }} </div>    
                         </div>
                     </div>
                 </div>
@@ -237,6 +240,7 @@
             save: function (modal) {
                 let vue = this;
                 if (modal == 'create') {
+                    this.error = {};
                     axios.post('/api/postamat/create', vue.newObject)
                         .then(function (response) {
                             if (response.data.status) {
@@ -257,6 +261,7 @@
                             console.log(error);
                         });
                 } else if (modal == 'edit') {
+                    this.error = {};
                     axios.post('/api/postamat/edit', vue.currentPostamat)
                     .then(function(response) {
                         if (response.data.status) {
@@ -264,7 +269,10 @@
                             vue.showModal(modal);
                         }
                     })
-                    .catch(function(error) {
+                    .catch((error) => {
+                        for (let field in error.response.data.errors) {
+                            this.error[field] = error.response.data.errors[field][0];
+                        };
                         console.log(error);
                     });
                 } else if (modal == 'delete') {

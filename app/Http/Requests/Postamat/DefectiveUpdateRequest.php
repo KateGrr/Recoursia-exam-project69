@@ -4,7 +4,7 @@ namespace App\Http\Requests\Postamat;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DefectiveStoreRequest extends FormRequest
+class DefectiveUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,8 @@ class DefectiveStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'     => 'max:50',
-            'description'       => 'max:255'
+            'title'     => 'required|max:50',
+            'description'       => 'required|max:255'
         ];
     }
 

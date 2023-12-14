@@ -46,6 +46,7 @@
                         <label for="title" class="col-sm-4 col-form-label fs-5">Title</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="title" v-model="newObject.title">
+                            <div class="row-sm-4 text-danger" > {{ error.title }} </div>
                         </div>
                     </div>
 
@@ -53,6 +54,7 @@
                         <label for="description" class="col-sm-4 col-form-label fs-5">Description</label>
                         <div class="col-sm-8">
                             <textarea type="text" class="form-control textarea1" id="description" v-model="newObject.description"></textarea>
+                            <div class="row-sm-4 text-danger" > {{ error.description }} </div>
                         </div>
                     </div>
                 </div>
@@ -76,14 +78,16 @@
                     <div class="row mt-4">
                         <label for="title" class="col-sm-4 col-form-label fs-5">Title</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="title" v-model="newObject.title">
+                            <input type="text" class="form-control" id="title" v-model="currentDefective.title">
+                            <div class="row-sm-4 text-danger" > {{ error.title }} </div>
                         </div>
                     </div>
 
                     <div class="row mt-4 mb-4">
                         <label for="description" class="col-sm-4 col-form-label fs-5">Description</label>
                         <div class="col-sm-8">
-                            <textarea type="text" class="form-control textarea1" id="description" v-model="newObject.description"></textarea>
+                            <textarea type="text" class="form-control textarea1" id="description" v-model="currentDefective.description"></textarea>
+                            <div class="row-sm-4 text-danger" > {{ error.description }} </div>
                         </div>
                     </div>
                 </div>
@@ -140,7 +144,8 @@
                     title: null,
                     description: null
                 },
-                currentDefective: {}
+                currentDefective: {},
+                error: {}
             };
         },
 
@@ -179,6 +184,7 @@
             save: function (modal) {
                 let vue = this;
                 if (modal == 'create') {
+                    this.error = {};
                     axios.post('/api/postamat/defective/create', vue.newObject)
                         .then(function (response) {
                             if (response.data.status) {
@@ -191,10 +197,14 @@
                                 };
                             }
                         })
-                        .catch(function (error) {
+                        .catch((error) => {
+                            for (let field in error.response.data.errors) {
+                                this.error[field] = error.response.data.errors[field][0];
+                            };
                             console.log(error);
                         });
                 } else if (modal == 'edit') {
+                    this.error = {};
                     axios.post('/api/postamat/defective/edit', vue.currentDefective)
                         .then(function (response) {
                             if (response.data.status) {
@@ -202,7 +212,10 @@
                                 vue.showModal(modal);
                             }
                         })
-                        .catch(function (error) {
+                        .catch((error) => {
+                            for (let field in error.response.data.errors) {
+                                this.error[field] = error.response.data.errors[field][0];
+                            };
                             console.log(error);
                         });
                 } else if (modal == 'delete') {
