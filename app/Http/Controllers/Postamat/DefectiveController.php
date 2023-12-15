@@ -46,4 +46,11 @@ class DefectiveController extends Controller
 
         return $this->index();
     }
+
+    public function delete(Request $request): JsonResponse
+    {
+        DefectivePostamat::find($request->id)->delete();
+
+        return $this->index();
+    }
 }
