@@ -40,6 +40,13 @@ Route::controller(DefectiveController::class)->group(function() {
     Route::post('/postamat/defective/delete', 'delete');
 });
 
+Route::controller(SolutionsController::class)->group(function() {
+    Route::get('/postamat/solutions/index', 'index');
+    Route::post('/postamat/solutions/create', 'create');
+    Route::post('/postamat/solutions/edit', 'edit');
+    Route::post('/postamat/solutions/delete', 'delete');
+});
+
 Route::group(['namespace' => 'App\Http\Controllers\Posterminal'], function() {
     Route::post('posterminal/showExisting',    'ShowExistingController');
     Route::post('posterminal/showRemote',    'ShowRemoteController');

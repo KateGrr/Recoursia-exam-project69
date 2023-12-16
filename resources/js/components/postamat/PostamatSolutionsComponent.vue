@@ -6,8 +6,8 @@
                 <thead class="table-dark">
                     <tr>
                         <th scope="col" class="col-sm">ID</th>
+                        <th scope="col">Theme_id</th>
                         <th scope="col">Title</th>
-                        <th scope="col">Description</th>
                         <th scope="col">Created</th>
                         <th scope="col">Updated</th>
                         <th class="float-right">
@@ -18,16 +18,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(defective, key) of defectives" :key="key">
-                        <td>{{ defective.id }}</td>
-                        <td>{{ defective.title }}</td>
-                        <td>{{ defective.description }}</td>
-                        <td>{{ defective.created_at }}</td>
-                        <td>{{ defective.updated_at }}</td>
+                    <tr v-for="(solution, key) of solutions" :key="key">
+                        <td>{{ solution.id }}</td>
+                        <td>{{ solution.defective_id }}</td>
+                        <td>{{ solution.title }}</td>
+                        <td>{{ solution.created_at }}</td>
+                        <td>{{ solution.updated_at }}</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('edit', defective)"> <i
+                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('edit', solutions)"> <i
                                     class="fa-regular fa-pen-to-square"></i></button>
-                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('delete', defective)"><i
+                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('delete', solutions)"><i
                                     class="fas fa-trash"></i></button>
                         </td>
                     </tr>
@@ -37,24 +37,24 @@
     </main>
     <MDBModal id="createModal" tabindex="-1" labelledby="createModalLabel" v-model="createModal">
         <MDBModalHeader>
-            <MDBModalTitle id="createModalLabel"> Add defect </MDBModalTitle>
+            <MDBModalTitle id="createModalLabel"> Add solution </MDBModalTitle>
         </MDBModalHeader>
         <MDBModalBody>
             <form id="form">
                 <div class="mb-3">
                     <div class="row mt-4">
-                        <label for="title" class="col-sm-4 col-form-label fs-5">Title</label>
+                        <label for="theme_id" class="col-sm-4 col-form-label fs-5">Theme_id</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="title" v-model="newObject.title">
-                            <div class="row-sm-4 text-danger" > {{ error.title }} </div>
+                            <input type="text" class="form-control" id="theme_id" v-model="newObject.theme_id">
+                            <div class="row-sm-4 text-danger" > {{ error.defective_id }} </div>
                         </div>
                     </div>
 
                     <div class="row mt-4 mb-4">
-                        <label for="description" class="col-sm-4 col-form-label fs-5">Description</label>
+                        <label for="title" class="col-sm-4 col-form-label fs-5">Title</label>
                         <div class="col-sm-8">
-                            <textarea type="text" class="form-control textarea1" id="description" v-model="newObject.description"></textarea>
-                            <div class="row-sm-4 text-danger" > {{ error.description }} </div>
+                            <textarea type="text" class="form-control textarea1" id="title" v-model="newObject.title"></textarea>
+                            <div class="row-sm-4 text-danger" > {{ error.title }} </div>
                         </div>
                     </div>
                 </div>
@@ -69,25 +69,25 @@
 
     <MDBModal id="editModal" tabindex="-1" labelledby="editModalLabel" v-model="editModal">
         <MDBModalHeader>
-            <MDBModalTitle id="editModalLabel"> Edit defect </MDBModalTitle>
+            <MDBModalTitle id="editModalLabel"> Edit solution </MDBModalTitle>
         </MDBModalHeader>
         <MDBModalBody>
 
             <form id="form">
                 <div class="mb-3">
                     <div class="row mt-4">
-                        <label for="title" class="col-sm-4 col-form-label fs-5">Title</label>
+                        <label for="theme_id" class="col-sm-4 col-form-label fs-5">Theme_id</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="title" v-model="currentDefective.title">
-                            <div class="row-sm-4 text-danger" > {{ error.title }} </div>
+                            <input type="text" class="form-control" id="theme_id" v-model="currentSolution.defective_id">
+                            <div class="row-sm-4 text-danger" > {{ error.defective_id }} </div>
                         </div>
                     </div>
 
                     <div class="row mt-4 mb-4">
-                        <label for="description" class="col-sm-4 col-form-label fs-5">Description</label>
+                        <label for="title" class="col-sm-4 col-form-label fs-5">Title</label>
                         <div class="col-sm-8">
-                            <textarea type="text" class="form-control textarea1" id="description" v-model="currentDefective.description"></textarea>
-                            <div class="row-sm-4 text-danger" > {{ error.description }} </div>
+                            <textarea type="text" class="form-control textarea1" id="title" v-model="currentSolution.title"></textarea>
+                            <div class="row-sm-4 text-danger" > {{ error.title }} </div>
                         </div>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
 
     <MDBModal id="deleteModal" tabindex="-1" labelledby="deleteModalLabel" v-model="deleteModal">
         <MDBModalHeader>
-            <MDBModalTitle id="deleteModalLabel"> Delete defect </MDBModalTitle>
+            <MDBModalTitle id="deleteModalLabel"> Delete solution </MDBModalTitle>
         </MDBModalHeader>
         <MDBModalBody>Are you sure?</MDBModalBody>
         <MDBModalFooter>
@@ -135,26 +135,26 @@
 
         data() {
             return {
+                solutions: [],
                 defectives: [],
                 createModal: false,
                 editModal: false,
                 deleteModal: false,
                 newObject: {
-                    status: 0,
-                    title: null,
-                    description: null
+                    defective_id: null,
+                    title: null
                 },
-                currentDefective: {},
+                currentSolution: {},
                 error: {}
             };
         },
 
         mounted() {
             let vue = this;
-            axios.get('/api/postamat/defective/index')
+            axios.get('/api/postamat/solutions/index')
                 .then(function (response) {
                     if (response.data.status) {
-                        vue.defectives = response.data.defectives;
+                        vue.solutions = response.data.solutions;
                     }
                 })
                 .catch(function (error) {

@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DefectivePostamat extends Model
+class PostamatSolution extends Model
 {
     use HasFactory;
 
-    public function solutions()
+    public function defectivePostamat()
     {
-        return $this->hasMany(PostamatSolution::class, 'defective_id', 'id');
+        return $this->belongsTo(DefectivePostamat::class, 'defective_id', 'id');
     }
 
     protected $fillable = [
         'title',
-        'description',
+        'defective_id',
     ];
 
     protected $casts = [

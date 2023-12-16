@@ -4,7 +4,7 @@ namespace App\Http\Requests\Postamat;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DefectiveStoreRequest extends FormRequest
+class SolutionsUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,7 @@ class DefectiveStoreRequest extends FormRequest
     {
         return [
             'title'     => 'required|max:50',
-            'description'       => 'required|max:255'
+            'defective_id'       => 'required|integer'
         ];
     }
 
@@ -31,9 +31,9 @@ class DefectiveStoreRequest extends FormRequest
 {
     return [
         'title.required' => 'title is required',
-        'description.required' => 'description is required',
+        'defective_id' => 'id is required',
         'title.max' => 'title must be less than 50 characters',
-        'description.max' => 'description must be less than 255 characters',
+        'defective_id.integer' => 'id must be integer number',
     ];
 }
 }
