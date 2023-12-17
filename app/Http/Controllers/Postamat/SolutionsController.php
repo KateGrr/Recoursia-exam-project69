@@ -15,13 +15,13 @@ class SolutionsController extends Controller
     public function index(): JsonResponse
     {
         $solutions = PostamatSolution::all();
-        $defective = DefectivePostamat::all();
+        $defectives = DefectivePostamat::all();
 
         return response()->json([
             'status' => true,
             'message' => 'Success',
             'solutions' => $solutions,
-            'defective' => $defective
+            'defectives' => $defectives
         ], 200);
     }
 
@@ -30,11 +30,13 @@ class SolutionsController extends Controller
         $request = $request->validated();
 
         $solutions = PostamatSolution::create($request);
+        $defectives = DefectivePostamat::all();
 
         return response()->json([
             'status' => true,
             'message' => 'Success',
-            'solutions' => $solutions
+            'solutions' => $solutions,
+            'defectives' =>  $defectives
         ], 200);
     }
 

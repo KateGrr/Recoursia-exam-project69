@@ -6,7 +6,7 @@
                 <thead class="table-dark">
                     <tr>
                         <th scope="col" class="col-sm">ID</th>
-                        <th scope="col">Theme_id</th>
+                        <th scope="col">Theme</th>
                         <th scope="col">Title</th>
                         <th scope="col">Created</th>
                         <th scope="col">Updated</th>
@@ -20,7 +20,7 @@
                 <tbody>
                     <tr v-for="(solution, key) of solutions" :key="key">
                         <td>{{ solution.id }}</td>
-                        <td>{{ solution.defective_id }}</td>
+                        <td>{{ solution.defective_title }}</td>
                         <td>{{ solution.title }}</td>
                         <td>{{ solution.created_at }}</td>
                         <td>{{ solution.updated_at }}</td>
@@ -41,20 +41,27 @@
         </MDBModalHeader>
         <MDBModalBody>
             <form id="form">
-                <div class="mb-3">
-                    <div class="row mt-4">
-                        <label for="theme_id" class="col-sm-4 col-form-label fs-5">Theme_id</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="theme_id" v-model="newObject.theme_id">
-                            <div class="row-sm-4 text-danger" > {{ error.defective_id }} </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <label for="theme_id" class="col-md-4 form-label">Select theme</label>
+                                <select class="form-select form-select-sm col-md-8" id="theme_id" v-model="newObject.defective_title">
+                                <option selected>theme</option>
+                                <option v-for="(defective, key) of defectives" :key="key">
+                                    {{  defective.defective['title'] }}
+                                </option>
+                            </select>
+                            <div class="row-sm-4 text-danger" > 
+                                {{ error.defective['title'] }} 
+                            </div>          
                         </div>
-                    </div>
-
-                    <div class="row mt-4 mb-4">
-                        <label for="title" class="col-sm-4 col-form-label fs-5">Title</label>
-                        <div class="col-sm-8">
-                            <textarea type="text" class="form-control textarea1" id="title" v-model="newObject.title"></textarea>
-                            <div class="row-sm-4 text-danger" > {{ error.title }} </div>
+                    
+                        <div class="row row2">
+                            <label for="title" class="col-md-3 form-label">Title</label>
+                            <div class="col-md-8">
+                                <textarea type="text" class="form-control textarea2" id="title" v-model="newObject.title"></textarea>
+                                <div class="row-sm-4 text-danger" > {{ error.title }} </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -74,20 +81,27 @@
         <MDBModalBody>
 
             <form id="form">
-                <div class="mb-3">
-                    <div class="row mt-4">
-                        <label for="theme_id" class="col-sm-4 col-form-label fs-5">Theme_id</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="theme_id" v-model="currentSolution.defective_id">
-                            <div class="row-sm-4 text-danger" > {{ error.defective_id }} </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <label for="theme_id" class="col-md-4 form-label">Select theme</label>
+                                <select class="form-select form-select-sm col-md-8" id="theme_id" v-model="currentSolution.defective_id">
+                                <option selected>theme</option>
+                                <option v-for="(defective, key) of defectives" :key="key">
+                                    {{  defective.defective['title'] }}
+                                </option>
+                            </select>
+                            <div class="row-sm-4 text-danger" > 
+                                {{ error.defective['title'] }} 
+                            </div>          
                         </div>
-                    </div>
-
-                    <div class="row mt-4 mb-4">
-                        <label for="title" class="col-sm-4 col-form-label fs-5">Title</label>
-                        <div class="col-sm-8">
-                            <textarea type="text" class="form-control textarea1" id="title" v-model="currentSolution.title"></textarea>
-                            <div class="row-sm-4 text-danger" > {{ error.title }} </div>
+                    
+                        <div class="row row2">
+                            <label for="title" class="col-md-3 form-label">Title</label>
+                            <div class="col-md-8">
+                                <textarea type="text" class="form-control textarea2" id="title" v-model="currentSolution.title"></textarea>
+                                <div class="row-sm-4 text-danger" > {{ error.title }} </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -141,7 +155,7 @@
                 editModal: false,
                 deleteModal: false,
                 newObject: {
-                    defective_id: null,
+                    defective_title: null,
                     title: null
                 },
                 currentSolution: {},
@@ -155,6 +169,7 @@
                 .then(function (response) {
                     if (response.data.status) {
                         vue.solutions = response.data.solutions;
+                        vue.defectives = response.data.defectives;
                     }
                 })
                 .catch(function (error) {
@@ -163,18 +178,18 @@
         },
 
         methods: {
-            showModal: function (modal, defective = null) {
+            showModal: function (modal, solution = null) {
                 if (modal == 'create') {
                     this.createModal = !this.createModal;
                 } else if (modal == 'edit') {
                     this.editModal = !this.editModal;
-                    if (defective != null) {
-                        this.currentDefective = defective;
+                    if (solution != null) {
+                        this.currentSolution = solution;
                     }
                 } else if (modal == 'delete') {
                     this.deleteModal = !this.deleteModal;
-                    if (defective != null) {
-                        this.currentDefective = defective;
+                    if (solution != null) {
+                        this.currentSolution = solution;
                     }
                 }
             },
@@ -185,15 +200,14 @@
                 let vue = this;
                 if (modal == 'create') {
                     this.error = {};
-                    axios.post('/api/postamat/defective/create', vue.newObject)
+                    axios.post('/api/postamat/solutions/create', vue.newObject)
                         .then(function (response) {
                             if (response.data.status) {
-                                vue.defectives = response.data.defectives;
+                                vue.solutions = response.data.solutions;
                                 vue.showModal(modal);
                                 vue.newObject = {
-                                    status: 0,
-                                    title: null,
-                                    description: null
+                                    defective_title: null,
+                                    title: null
                                 };
                             }
                         })
@@ -205,10 +219,10 @@
                         });
                 } else if (modal == 'edit') {
                     this.error = {};
-                    axios.post('/api/postamat/defective/edit', vue.currentDefective)
+                    axios.post('/api/postamat/solutions/edit', vue.currentSolution)
                         .then(function (response) {
                             if (response.data.status) {
-                                vue.defectives = response.data.defectives;
+                                vue.solutions = response.data.solutions;
                                 vue.showModal(modal);
                             }
                         })
@@ -219,11 +233,11 @@
                             console.log(error);
                         });
                 } else if (modal == 'delete') {
-                    console.log(this.currentDefective);
-                    axios.post('/api/postamat/defective/delete', vue.currentDefective)
+                    console.log(this.currentSolution);
+                    axios.post('/api/postamat/solutions/delete', vue.currentSolution)
                         .then(function (response) {
                             if (response.data.status) {
-                                vue.defectives = response.data.defectives;
+                                vue.solutions = response.data.solutions;
                                 vue.showModal(modal);
                             }
                         })

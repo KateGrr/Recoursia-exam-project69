@@ -2,6 +2,7 @@
 use App\Http\Controllers\CardomatController;
 use App\Http\Controllers\Postamat\PostamatsController;
 use App\Http\Controllers\Postamat\DefectiveController;
+use App\Http\Controllers\Postamat\SolutionsController;
 use App\Http\Controllers\posterminalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
