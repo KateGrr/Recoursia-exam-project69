@@ -1,5 +1,4 @@
 <template>
-    <title>Home</title>
     <main>
         <section class="why-us">
             <div class="container">
@@ -35,11 +34,15 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6 col-lg-4">
+                    <div class="col-sm-6 col-lg-5">
                         <div class="box">
                             <span>Posterminal</span>
                             <h4>Aliev Eldar</h4>
-                            <p>There are many variations of passages of Lorem Ipsum available, the majority have suffered alteration in some form</p>
+                            <p>
+                                Stage 1. made CRUD and Soft deleete for Posterminals<br>
+                                Stage 2. made CRUD and Connection for Themes, and Solutions<br>
+                                Stage 3. --- [ ^ _ *]<br>
+                            </p>
                         </div>
                     </div>
 
@@ -58,6 +61,6 @@
 
 <script>
     export default {
-        name: 'mainComponent',
+        name: 'HomeComponent',
     }
 </script>
