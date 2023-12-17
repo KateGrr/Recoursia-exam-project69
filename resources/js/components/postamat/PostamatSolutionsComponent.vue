@@ -20,14 +20,14 @@
                 <tbody>
                     <tr v-for="(solution, key) of solutions" :key="key">
                         <td>{{ solution.id }}</td>
-                        <td>{{ solution.defective_id }}</td>
+                        <td>{{ solution.defective_postamat.title }}</td>
                         <td>{{ solution.title }}</td>
                         <td>{{ solution.created_at }}</td>
                         <td>{{ solution.updated_at }}</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('edit', solutions)"> <i
+                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('edit', solution)"> <i
                                     class="fa-regular fa-pen-to-square"></i></button>
-                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('delete', solutions)"><i
+                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('delete', solution)"><i
                                     class="fas fa-trash"></i></button>
                         </td>
                     </tr>
@@ -46,7 +46,7 @@
                         <div class="row">
                             <label for="theme_id" class="col-md-4 form-label">Select theme</label>
                                 <select class="form-select form-select-sm col-md-8" id="theme_id" v-model="newObject.defective_id">
-                                <option disabled selected>theme_id</option>
+                                <option disabled selected>theme</option>
                                 <option v-for="defective in defectives" :value="defective.id">
                                     {{  defective.title }}
                                 </option>
@@ -86,7 +86,7 @@
                         <div class="row">
                             <label for="theme_id" class="col-md-4 form-label">Select theme</label>
                                 <select class="form-select form-select-sm col-md-8" id="theme_id" v-model="currentSolution.defective_id">
-                                <option disabled selected>theme_id</option>
+                                <option disabled selected>theme</option>
                                 <option v-for="defective in defectives" :value="defective.id">
                                     {{  defective.title }}
                                 </option>
@@ -154,7 +154,10 @@
                 createModal: false,
                 editModal: false,
                 deleteModal: false,
-                newObject: {},
+                newObject: {
+                    defective_id: null,
+                    title: null
+                },
                 currentSolution: {},
                 error: {}
             };
@@ -166,12 +169,21 @@
                 .then(function (response) {
                     if (response.data.status) {
                         vue.solutions = response.data.solutions;
-                        vue.defectives = response.data.defectives;
                     }
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
+
+            axios.get('/api/postamat/defective/index')
+            .then(function (response) {
+                if (response.data.status) {
+                    vue.defectives = response.data.defectives;
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });    
         },
 
         methods: {
@@ -203,6 +215,7 @@
                                 vue.solutions = response.data.solutions;
                                 vue.showModal(modal);
                                 vue.newObject = {
+                                    defective_id: null,
                                     title: null
                                 };
                             }
@@ -229,7 +242,7 @@
                             console.log(error);
                         });
                 } else if (modal == 'delete') {
-                    console.log(this.currentSolution);
+                    console.log(vue.currentSolution);
                     axios.post('/api/postamat/solutions/delete', vue.currentSolution)
                         .then(function (response) {
                             if (response.data.status) {

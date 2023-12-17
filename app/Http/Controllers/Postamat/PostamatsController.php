@@ -56,4 +56,20 @@ class PostamatsController extends Controller
 
         return $this->index();
     }
+
+    public function showDeleted(): JsonResponse
+    {
+        $postamats = Postamat::onlyTrashed()->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Success',
+            'postamats' => $postamats
+        ], 200);
+    }
+
+    public function restore(Request $request): JsonResponse
+    {
+        $postamats = Postamat::onlyTrashed()->where('id', $request->id)->get()[0]->restore();
+    }
 }
