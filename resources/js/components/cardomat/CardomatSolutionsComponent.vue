@@ -5,7 +5,7 @@
         <thead class="table-dark">
             <tr>
             <th scope="col">ID</th>
-            <th scope="col">theme_id</th>
+            <th scope="col">Theme title</th>
             <th scope="col">Title</th>
             <th scope="col">Created</th>
             <th scope="col">Updated</th>
@@ -22,7 +22,7 @@
         <tbody>
             <tr v-for="(solution, key) of solutions" :key="key">
                 <td>{{ solution.id }}</td>
-                <td>{{ getThemeTitle(solution.theme_id) }}</td>
+                <td>{{ solution.theme.title }}</td>
                 <td>{{ solution.title }}</td>
                 <td>{{ solution.created_at }}</td>
                 <td>{{ solution.updated_at }}</td>
@@ -71,19 +71,17 @@
             <MDBModalBody>
                 <form>
                     <div class="row mt-4">
-                        <label for="edittitle" class="col-sm-4 col-form-label fs-5">Title</label>
+                        <label for="edittheme_id" class="col-sm-4 col-form-label fs-5">Theme ID</label>
                         <div class="col-sm-4">
-                            <select class="form-control" id="edittitle" v-model="currentSolution.title">
-                                <option v-for="theme in themes" :key="theme.id" :value="theme.title">{{ theme.title }}</option>
+                            <select class="form-control" id="edittheme_id" v-model="currentSolution.theme_id">
+                                <option v-for="theme in themes" :key="theme.id" :value="theme.id">{{ theme.title }}</option>
                             </select>
                         </div>
                     </div>
                     <div class="row mt-4">
-                        <label for="edittheme_id" class="col-sm-4 col-form-label fs-5">Theme ID</label>
-                        <div class="col-sm-4">
-                            <select class="form-control" id="edittheme_id" v-model="currentSolution.theme_id">
-                                <option v-for="theme in themes" :key="theme.id" :value="theme.title">{{ theme.title }}</option>
-                            </select>
+                        <label for="edittitle" class="col-sm-4 col-form-label fs-5">title</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" id="edittitle" v-model="currentSolution.title" style="height: 100px;"></textarea>
                         </div>
                     </div>
                     <div class="row mt-4">
@@ -155,12 +153,7 @@ export default {
                         this.currentSolution = solution;
                     }
                 }
-            },
-
-        getThemeTitle(themeId) {
-            const theme = this.themes.find(theme => theme.id === themeId);
-            return theme ? theme.title : 'Unknown Theme';
-        },    
+            },  
 
         loadThemes() {
             axios.get('/api/cardomat/themes/find')

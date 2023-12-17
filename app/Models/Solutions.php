@@ -16,9 +16,9 @@ class Solutions extends Model
         'updated_at'
     ];
 
-    public function defective()
+    public function theme()
     {
-        return $this->belongsTo(Defective::class, 'theme_id');
+        return $this->belongsTo(Defective_card::class, 'theme_id', 'id');
     }
 
     protected $casts = [

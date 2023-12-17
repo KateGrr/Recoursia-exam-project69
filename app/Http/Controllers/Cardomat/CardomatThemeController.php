@@ -75,19 +75,19 @@ class CardomatThemeController extends Controller
     }
 
     public function find()
-{
-    try {
-        $themes = Defective::all();
+    {
+        try {
+            $themes = Defective::all();
 
-        return response()->json([
-            'themes' => $themes,
-            'status' => true
-        ]);
-    } catch (\Exception $e) {
-        return response()->json([
-            'error' => $e->getMessage(),
-            'status' => false
-        ], 500);
+            return response()->json([
+                'themes' => $themes,
+                'status' => true
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+                'status' => false
+            ], 500);
+        }
     }
-}
 }

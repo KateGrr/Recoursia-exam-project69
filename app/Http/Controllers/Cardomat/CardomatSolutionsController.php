@@ -11,8 +11,8 @@ class CardomatSolutionsController extends Controller
 {
     public function index(): JsonResponse
     {
-        $solutions = Solutions::all();
-    
+        $solutions = Solutions::with('theme')->get();
+
         return response()->json([
             'status' => true,
             'message' => 'Success',
@@ -27,7 +27,7 @@ class CardomatSolutionsController extends Controller
             'title' => $request->title,
         ]);
     
-        $solutions = Solutions::all();
+        $solutions = Solutions::with('theme')->get();
     
         return response()->json([
             'status' => true,
@@ -43,7 +43,7 @@ class CardomatSolutionsController extends Controller
             'title' => $request->title,
         ]);
 
-        $solutions = Solutions::all();
+        $solutions = Solutions::with('theme')->get();
 
         return response()->json([
             'status'=> true,
@@ -65,7 +65,7 @@ class CardomatSolutionsController extends Controller
     
         $solutions->delete();
     
-        $solutions = Solutions::all();
+        $solutions = Solutions::with('theme')->get();
     
         return response()->json([
             'status' => true, 
