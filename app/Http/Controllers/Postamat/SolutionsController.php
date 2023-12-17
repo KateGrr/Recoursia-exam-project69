@@ -45,7 +45,7 @@ class SolutionsController extends Controller
         $data = $request->validated();
 
         PostamatSolution::find($request->id)->update([
-            'theme_id' => $data['theme_id'],
+            'defective_id' => $data['defective_id'],
             'title' => $data['title']
         ]);
 
