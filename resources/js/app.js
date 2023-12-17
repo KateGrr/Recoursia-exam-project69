@@ -13,7 +13,6 @@ import './bootstrap';
 import { createApp } from 'vue';
 import NavigationComponent from './components/NavigationComponent.vue';
 import router from './router';
-
 const app = createApp(NavigationComponent);
 app.use(router);
 

@@ -2,6 +2,7 @@
     <title>Cardomat</title>
     <div>
         <div class="container">
+            <h3 class="text mt-4 mb-3">Cardomat</h3>
         <table class="table align-middle mb-0 bg-white mt-2">
             <thead class="table-dark">
                 <tr>
@@ -19,9 +20,6 @@
                         </button>
                         <button type="button" class="btn-sm btn btn-light m-1" @click="refreshData" data-mdb-ripple-init>
                             <i class="fa-solid fa-rotate"></i>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-light m-1" @click="restoreCard(card)" data-mdb-ripple-init>
-                            <i class="fa-solid fa-eraser"></i>
                         </button>
                     </div>
                 </th>
@@ -261,14 +259,14 @@
             refreshData: function () {
                  let vue = this;
                  axios.get('/api/cardomat/all')
-                 .then(function (response) {
-                    if (response.data.status) {
-                        vue.cards = response.data.cards;
-                    }
-                })
-                .catch(function (error) {
-                    console.log("Error refreshing data:", error);
-                });
+                    .then(function (response) {
+                        if (response.data.status) {
+                            vue.cards = response.data.cards;
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log("Error refreshing data:", error);
+                    });
             },
         }
     }

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Cardomat;
 
+use App\Http\Controllers\Controller;
 use App\Models\Card;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -51,7 +52,6 @@ class CardomatController extends Controller
             'cards' => $cards
         ], 200);
     }
-
         /**
      * edit
      *
@@ -97,6 +97,37 @@ class CardomatController extends Controller
             'status' => true, 
             'message' => 'Card deleted successfully', 
             'cards' => $cards
+        ]);
+    }
+
+    public function getDeletedCards()
+    {
+        $deletedCards = Card::onlyTrashed()->get();
+
+        return response()->json([
+            'status' => true,
+            'deletedCards' => $deletedCards,
+        ]);
+    }
+
+    public function restore($id)
+    {
+        $deletedCard = Card::withTrashed()->find($id);
+
+        if (!$deletedCard) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Deleted card not found',
+            ], 404);
+        }
+
+        $deletedCard->restore();
+
+        $deletedCards = Card::onlyTrashed()->get();
+
+        return response()->json([
+            'status' => true,
+            'deletedCards' => $deletedCards,
         ]);
     }
 }

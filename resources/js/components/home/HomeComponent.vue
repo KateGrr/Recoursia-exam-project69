@@ -1,5 +1,4 @@
 <template>
-    <title>Home</title>
     <main>
         <section class="why-us">
             <div class="container">
@@ -58,6 +57,6 @@
 
 <script>
     export default {
-        name: 'mainComponent',
+        name: 'HomeComponent',
     }
 </script>

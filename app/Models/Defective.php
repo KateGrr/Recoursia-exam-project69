@@ -4,25 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Card extends Model
+class Defective extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $fillable = [
-        'address',
-        'system_id',
-        'status',
-        'serial_number',
+        'title', 
+        'description',
+        'created_at', 
+        'updated_at'
     ];
-    
-    protected $guarded = ['id'];
+
+    public function solutions()
+    {
+        return $this->hasMany(Solutions::class, 'theme_id', 'id');
+    }
 
     protected $casts = [
         'created_at' => 'datetime:d/m/Y H:i',
         'updated_at' => 'datetime:d/m/Y H:i',
-        'deleted_at' => 'datetime:d/m/Y H:i',
     ];
 }
