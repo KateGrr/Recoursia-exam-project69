@@ -16,7 +16,7 @@ class PostamatSolution extends Model
 
     protected $fillable = [
         'title',
-        'defective_id',
+        'defective_id'
     ];
 
     protected $casts = [

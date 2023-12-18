@@ -28,6 +28,8 @@ class DefectiveController extends Controller
 
         $defectives = DefectivePostamat::create($request);
 
+        $defectives = DefectivePostamat::all();
+
         return response()->json([
             'status' => true,
             'message' => 'Success',

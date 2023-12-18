@@ -25,9 +25,9 @@ class SolutionsController extends Controller
 
     public function create(SolutionsStoreRequest $request): JsonResponse
     {
-        $request = $request->validated();
+        $data = $request->validated();
 
-        PostamatSolution::create($request);
+        PostamatSolution::create($data);
         
         return $this->index();
     }

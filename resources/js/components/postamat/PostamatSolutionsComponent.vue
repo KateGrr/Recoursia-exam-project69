@@ -45,15 +45,12 @@
                     <div class="container-fluid">
                         <div class="row">
                             <label for="theme_id" class="col-md-4 form-label">Select theme</label>
-                                <select class="form-select form-select-sm col-md-8" id="theme_id" v-model="newObject.defective_id">
+                                <select class="form-select form-select col-md-8" id="theme_id" v-model="newObject.defective_id">
                                     <option disabled selected value="">select theme</option>
                                     <option v-for="defective in defectives" :value="defective.id">
                                         {{  defective.title }}
                                     </option>
-                                </select>
-                                <div class="col-md-2 ms-auto text-danger" > 
-                                    {{ error.title }} 
-                                </div>          
+                                </select>         
                         </div>
                     
                         <div class="row row2">
@@ -85,15 +82,11 @@
                     <div class="container-fluid">
                         <div class="row">
                             <label for="theme_id" class="col-md-4 form-label">Select theme</label>
-                                <select class="form-select form-select-sm col-md-8" id="theme_id" v-model="currentSolution.defective_id">
-                                <option disabled selected value="">select theme</option>
-                                <option v-for="defective in defectives" :value="defective.id">
+                                <select class="form-select form-select col-md-8" id="theme_id" v-model="currentSolution.defective_id">
+                                <option disabled selected v-for="defective in defectives" :value="defective.id">
                                     {{  defective.title }}
                                 </option>
-                            </select>
-                            <div class="row-sm-4 text-danger" > 
-                                {{ error.defective_id }} 
-                            </div>          
+                            </select>        
                         </div>
                     
                         <div class="row row2">

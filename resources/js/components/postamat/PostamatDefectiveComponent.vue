@@ -1,5 +1,5 @@
 <template>
-    <h1 class="h1">Defective postamats</h1>
+    <h1 class="h1">Postamats defects</h1>
     <main class="mt-4 d-flex flex-column align-items-center">
         <div class="col-sm-12">
             <table class="table">

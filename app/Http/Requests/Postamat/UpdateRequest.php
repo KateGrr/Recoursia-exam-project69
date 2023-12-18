@@ -24,9 +24,9 @@ class UpdateRequest extends FormRequest
         return [
             'id'            => 'integer',
             'status'        => 'in:0,1',
-            'system_id'     => 'size:8|regex:/PST[0-9]{5}/u',
-            'address'       => 'max:255',
-            'serial_number' => 'size:10|regex:/S[0-9]{9}/u
+            'system_id'     => 'required|size:8|regex:/PST[0-9]{5}/u',
+            'address'       => 'required|max:255',
+            'serial_number' => 'required|size:10|regex:/S[0-9]{9}/u
             ',
         ];
     }
