@@ -32,6 +32,8 @@ Route::controller(PostamatsController::class)->group(function() {
     Route::post('/postamat/create', 'create');
     Route::post('/postamat/edit', 'edit');
     Route::post('/postamat/delete', 'delete');
+    Route::get('/postamat/showDeleted', 'showDeleted');
+    Route::post('/postamat/restore', 'restore');
 });
 
 Route::controller(DefectiveController::class)->group(function() {

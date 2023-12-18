@@ -23,7 +23,7 @@ class SolutionsUpdateRequest extends FormRequest
     {
         return [
             'title'     => 'required|max:50',
-            'defective_id'       => 'required|integer'
+            'defective_title'       => 'required|not_in:0'
         ];
     }
 
@@ -31,7 +31,7 @@ class SolutionsUpdateRequest extends FormRequest
 {
     return [
         'title.required' => 'title is required',
-        'defective_id' => 'id is required',
+        'defective_title' => 'theme is required',
         'title.max' => 'title must be less than 50 characters',
         'defective_id.integer' => 'id must be integer number',
     ];

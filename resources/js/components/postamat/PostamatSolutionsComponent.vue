@@ -46,14 +46,14 @@
                         <div class="row">
                             <label for="theme_id" class="col-md-4 form-label">Select theme</label>
                                 <select class="form-select form-select-sm col-md-8" id="theme_id" v-model="newObject.defective_id">
-                                <option disabled selected>theme</option>
-                                <option v-for="defective in defectives" :value="defective.id">
-                                    {{  defective.title }}
-                                </option>
-                            </select>
-                            <div class="row-sm-4 text-danger" > 
-                                {{ error.defective_id }} 
-                            </div>          
+                                    <option disabled selected value="">select theme</option>
+                                    <option v-for="defective in defectives" :value="defective.id">
+                                        {{  defective.title }}
+                                    </option>
+                                </select>
+                                <div class="col-md-2 ms-auto text-danger" > 
+                                    {{ error.title }} 
+                                </div>          
                         </div>
                     
                         <div class="row row2">
@@ -86,7 +86,7 @@
                         <div class="row">
                             <label for="theme_id" class="col-md-4 form-label">Select theme</label>
                                 <select class="form-select form-select-sm col-md-8" id="theme_id" v-model="currentSolution.defective_id">
-                                <option disabled selected>theme</option>
+                                <option disabled selected value="">select theme</option>
                                 <option v-for="defective in defectives" :value="defective.id">
                                     {{  defective.title }}
                                 </option>
@@ -176,15 +176,15 @@
                 });
 
             axios.get('/api/postamat/defective/index')
-            .then(function (response) {
-                if (response.data.status) {
-                    vue.defectives = response.data.defectives;
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });    
-        },
+                .then(function (response) {
+                    if (response.data.status) {
+                        vue.defectives = response.data.defectives;
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });    
+            },
 
         methods: {
             showModal: function (modal, solution = null) {
