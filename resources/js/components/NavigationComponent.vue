@@ -121,3 +121,4 @@
         name: 'NavigationComponent',
     }
 </script>
+<style src="/public/css/nav.css"></style>
