@@ -2,8 +2,9 @@ img[alt="logo"] {
     width: 100px;
 }
 .nav-link { color: black;}
-.nav-link:hover, .nav-link:focus { color: #FFC107;}
-.router-link-active, .router-link-active:focus { color:  #FFC107;}
+.nav-link:hover, .nav-link:focus,
+.router-link-active, .router-link-active:focus,
+.nav-btn-active{ color:  #FFC107;}
 
 .dropdown-menu {
     --mdb-dropdown-min-width: none;

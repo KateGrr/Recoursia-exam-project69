@@ -23,7 +23,7 @@
                                 <!-- <router-link class="nav-link" to="/recycler/solutions">Solutions</router-link> -->
                             </li>
                             <li>
-                                <!-- <router-link class="nav-link" to="/recycler/deleted">Deleted</router-link> -->
+                                <!-- <router-link class="nav-link" to="/recycler/deleted">Deleted Recycler</router-link> -->
                             </li>
                         </ul>
                     </li>
@@ -43,7 +43,7 @@
                                 <!-- <router-link class="nav-link" to="/terminal/solutions">Solutions</router-link> -->
                             </li>
                             <li>
-                                <!-- <router-link class="nav-link" to="/terminal/deleted">Deleted</router-link> -->
+                                <!-- <router-link class="nav-link" to="/terminal/deleted">Deleted Terminal</router-link> -->
                             </li>
                         </ul>
                     </li>
@@ -63,7 +63,7 @@
                                 <router-link class="nav-link" to="/postamat/solutions">Solutions</router-link>
                             </li>
                             <li>
-                                <router-link class="nav-link" to="/postamat/deleted">Deleted</router-link>
+                                <router-link class="nav-link" to="/postamat/deleted">Deleted Postamat</router-link>
                             </li>
                         </ul>
                     </li>
@@ -83,7 +83,7 @@
                                 <router-link class="nav-link" to="/posterminal/solutions">Solutions</router-link>
                             </li>
                             <li>
-                                <router-link class="nav-link" to="/posterminal/deleted">Deleted</router-link>
+                                <router-link class="nav-link" to="/posterminal/deleted">Deleted Posterminal</router-link>
                             </li>
                         </ul>
                     </li>
@@ -103,7 +103,7 @@
                                 <router-link class="nav-link" to="/cardomat/solutions">Solutions</router-link>
                             </li>
                             <li>
-                                <router-link class="nav-link" to="/cardomat/deleted">Deleted</router-link>
+                                <router-link class="nav-link" to="/cardomat/deleted">Deleted Cardomat</router-link>
                             </li>
                         </ul>
                     </li>
