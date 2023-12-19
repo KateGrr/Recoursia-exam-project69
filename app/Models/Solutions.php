@@ -18,7 +18,7 @@ class Solutions extends Model
 
     public function theme()
     {
-        return $this->belongsTo(Defective_card::class, 'theme_id', 'id');
+        return $this->belongsTo(Defective::class, 'theme_id', 'id');
     }
 
     protected $casts = [

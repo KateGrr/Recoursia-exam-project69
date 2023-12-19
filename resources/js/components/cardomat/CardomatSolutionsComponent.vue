@@ -131,17 +131,17 @@ export default {
     mounted() {
         this.loadThemes();
 
-            let vue = this;
-            axios.get('/api/cardomat/solutions/all')
-            .then(function (response) {
-                if (response.data.status) {
-                    vue.solutions = response.data.solutions;
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-        },
+        let vue = this;
+        axios.get('/api/cardomat/solutions/all')
+        .then(function (response) {
+            if (response.data.status) {
+                vue.solutions = response.data.solutions;
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    },
 
     methods: {
         showModal: function (modal, solution = null) {
