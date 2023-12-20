@@ -4,7 +4,7 @@ namespace App\Http\Requests\Posterminal;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class SolutionUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,9 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status'        => 'in:0,1',
-            'system_id'     => 'size:8|regex:/POS[0-9]{5}/u|unique:posterminals,system_id',
-            'address'       => 'max:255',
-            'serial_number' => 'size:10|regex:/S[0-9]{9}/u|unique:posterminals,serial_number',
+            'id' => 'integer',
+            'theme_id' => 'integer',
+            'title'    => 'min:3|max:50'
         ];
     }
 }

@@ -8,7 +8,7 @@
                 </router-link>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                        <a class="nav-link dropdown-toggle" href="recycler" id="navbarDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Recycler
                         </a>
@@ -23,12 +23,12 @@
                                 <!-- <router-link class="nav-link" to="/recycler/solutions">Solutions</router-link> -->
                             </li>
                             <li>
-                                <!-- <router-link class="nav-link" to="/recycler/deleted">Deleted</router-link> -->
+                                <!-- <router-link class="nav-link" to="/recycler/deleted">Deleted Recycler</router-link> -->
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                        <a class="nav-link dropdown-toggle" href="terminal" id="navbarDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Terminal
                         </a>
@@ -43,12 +43,12 @@
                                 <!-- <router-link class="nav-link" to="/terminal/solutions">Solutions</router-link> -->
                             </li>
                             <li>
-                                <!-- <router-link class="nav-link" to="/terminal/deleted">Deleted</router-link> -->
+                                <!-- <router-link class="nav-link" to="/terminal/deleted">Deleted Terminal</router-link> -->
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                        <a class="nav-link dropdown-toggle" href="postamat" id="navbarDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Postamat
                         </a>
@@ -63,12 +63,12 @@
                                 <router-link class="nav-link" to="/postamat/solutions">Solutions</router-link>
                             </li>
                             <li>
-                                <router-link class="nav-link" to="/postamat/deleted">Deleted</router-link>
+                                <router-link class="nav-link" to="/postamat/deleted">Deleted Postamat</router-link>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                        <a class="nav-link dropdown-toggle" href="posterminal" id="navbarDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Posterminal
                         </a>
@@ -83,12 +83,12 @@
                                 <router-link class="nav-link" to="/posterminal/solutions">Solutions</router-link>
                             </li>
                             <li>
-                                <router-link class="nav-link" to="/posterminal/deleted">Deleted</router-link>
+                                <router-link class="nav-link" to="/posterminal/deleted">Deleted Posterminal</router-link>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                        <a class="nav-link dropdown-toggle" href="cardomat" id="navbarDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Cardomat
                         </a>
@@ -103,7 +103,7 @@
                                 <router-link class="nav-link" to="/cardomat/solutions">Solutions</router-link>
                             </li>
                             <li>
-                                <router-link class="nav-link" to="/cardomat/deleted">Deleted</router-link>
+                                <router-link class="nav-link" to="/cardomat/deleted">Deleted Cardomat</router-link>
                             </li>
                         </ul>
                     </li>
@@ -121,3 +121,4 @@
         name: 'NavigationComponent',
     }
 </script>
+<style src="/public/css/nav.css"></style>

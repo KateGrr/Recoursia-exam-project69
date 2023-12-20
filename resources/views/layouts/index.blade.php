@@ -10,13 +10,17 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"/>
         <!-- vue.js, bootstrap -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
         <!-- MDB bootstrap-->
         <link rel="stylesheet" href="{{ asset('css/mdb.min.css') }}">
+        <!-- MDB Script -->
+        <script src="{{ asset('js/mdb.umd.min.js') }}" defer></script>
+
         <!-- content css -->
         <link rel="stylesheet" href="{{ asset('css/nav.css') }}">
         <link rel="stylesheet" href="{{ asset('css/home/content.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/posterminal/modalMDB.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/postamat/postamat.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/modalMDB.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/cursor.css') }}">
     </head>
     <body id="app">
     </body>
