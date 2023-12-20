@@ -153,11 +153,6 @@
         components: {
             ModalErrorComponent,
             ModalConfirmComponent,
-
-            MDBModal,
-            MDBModalHeader,
-            MDBModalTitle,
-            MDBModalBody,
             MDBModalFooter,
             MDBBtn,
         },

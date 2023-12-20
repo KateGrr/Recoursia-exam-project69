@@ -18,7 +18,7 @@ class Defective extends Model
 
     public function solutions()
     {
-        return $this->hasMany(Solutions_card::class, 'theme_id', 'id');
+        return $this->hasMany(Solutions::class, 'theme_id', 'id');
     }
 
     protected $casts = [

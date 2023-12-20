@@ -29,7 +29,7 @@
                     <div class="col-sm-6 col-lg-4">
                         <div class="box">
                             <span>Postamat</span>
-                            <h4>Name</h4>
+                            <h4>Grigoryeva Ekaterina</h4>
                             <p>There are many variations of Lorem Ipsum available, but the majority have suffered alteration in some form</p>
                         </div>
                     </div>
