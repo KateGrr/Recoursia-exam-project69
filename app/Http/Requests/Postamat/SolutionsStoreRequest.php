@@ -28,10 +28,10 @@ class SolutionsStoreRequest extends FormRequest
     }
 
     public function messages(): array
-{
-    return [
-        'title.required' => 'title is required',
-        'title.max' => 'title must be less than 50 characters'
-    ];
-}
+    {
+        return [
+            'title.required' => 'title is required',
+            'title.max' => 'title must be less than 50 characters'
+        ];
+    }
 }

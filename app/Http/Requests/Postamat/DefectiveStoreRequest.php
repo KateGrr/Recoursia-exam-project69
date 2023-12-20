@@ -28,12 +28,12 @@ class DefectiveStoreRequest extends FormRequest
     }
 
     public function messages(): array
-{
-    return [
-        'title.required' => 'title is required',
-        'description.required' => 'description is required',
-        'title.max' => 'title must be less than 50 characters',
-        'description.max' => 'description must be less than 255 characters',
-    ];
-}
+    {
+        return [
+            'title.required' => 'title is required',
+            'description.required' => 'description is required',
+            'title.max' => 'title must be less than 50 characters',
+            'description.max' => 'description must be less than 255 characters',
+        ];
+    }
 }

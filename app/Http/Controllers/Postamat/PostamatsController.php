@@ -27,13 +27,9 @@ class PostamatsController extends Controller
     {
         $data = $request->validated();
 
-        $postamats = Postamat::create($data);
+        Postamat::create($data);
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Postamat successfully added',
-            'postamats' => $postamats 
-        ], 200);
+        return $this->index();
     }
 
     public function edit(UpdateRequest $request): JsonResponse
