@@ -1,4 +1,5 @@
 <template>
+    <h1 class="h1">Active postamats</h1>
     <main class="mt-4 d-flex flex-column align-items-center">
         <div class="col-sm-12">
             <table class="table">
@@ -38,13 +39,12 @@
             </table>
         </div>
     </main>
-
     <MDBModal id="createModal" tabindex="-1" labelledby="createModalLabel" v-model="createModal">
         <MDBModalHeader>
             <MDBModalTitle id="createModalLabel"> Add Postamat </MDBModalTitle>
         </MDBModalHeader>
         <MDBModalBody>
-            <form class="needs-validation" id="form">
+            <form id="form">
                 <div class="mb-3">
                     <fieldset class="row">
                         <legend class="col-form-label col-sm-4 pt-0 fs-5">Status</legend>
@@ -63,10 +63,11 @@
                     </fieldset>
 
                     <div class="row mt-4">
-                        <label for="system_id" class="col-sm-4 col-form-label fs-5" pattern="[A-Z]{3}[0-9]{5}">System
+                        <label for="system_id" class="col-sm-4 col-form-label fs-5">System
                             id</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="system_id" v-model="newObject.system_id">
+                            <div class="row-sm-4 text-danger" > {{ error.system_id}} </div>
                         </div>
                     </div>
 
@@ -74,6 +75,7 @@
                         <label for="address" class="col-sm-4 col-form-label fs-5">Address</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="address" v-model="newObject.address">
+                            <div class="row-sm-2 text-danger" > {{ error.address}} </div>
                         </div>
                     </div>
 
@@ -82,6 +84,7 @@
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="serial_number"
                                 v-model="newObject.serial_number">
+                            <div class="row-sm-2 text-danger" > {{ error.serial_number}} </div>
                         </div>
                     </div>
                 </div>
@@ -122,6 +125,7 @@
                             id</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="system_id" v-model="currentPostamat.system_id">
+                            <div class="row-sm-4 text-danger" > {{ error.system_id }} </div>
                         </div>
                     </div>
 
@@ -129,6 +133,7 @@
                         <label for="address" class="col-sm-4 col-form-label fs-5">Address</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="address" v-model="currentPostamat.address">
+                            <div class="row-sm-4 text-danger" > {{ error.address }} </div>
                         </div>
                     </div>
 
@@ -137,6 +142,7 @@
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="serial_number"
                                 v-model="currentPostamat.serial_number">
+                                <div class="row-sm-4 text-danger" > {{ error.serial_number }} </div>    
                         </div>
                     </div>
                 </div>
@@ -171,6 +177,7 @@
         MDBModalFooter,
         MDBBtn,
     } from 'mdb-vue-ui-kit';
+
     export default {
         components: {
             MDBModal,
@@ -180,6 +187,7 @@
             MDBModalFooter,
             MDBBtn,
         },
+
         data() {
             return {
                 postamats: [],
@@ -192,13 +200,14 @@
                     address: null,
                     serial_number: null
                 },
-                currentPostamat: {}
+                currentPostamat: {},
+                error: {},
             };
         },
 
         mounted() {
             let vue = this;
-            axios.get('/api/all')
+            axios.get('/api/postamat/index')
                 .then(function (response) {
                     if (response.data.status) {
                         vue.postamats = response.data.postamats;
@@ -228,13 +237,14 @@
 
 
 
-            save: function(modal) {
+            save: function (modal) {
                 let vue = this;
                 if (modal == 'create') {
-                    axios.post('/api/create', vue.newObject)
+                    this.error = {};
+                    axios.post('/api/postamat/create', vue.newObject)
                         .then(function (response) {
                             if (response.data.status) {
-                                vue.postamats = response.data.postamats;
+                                vue.cards = response.data.cards;
                                 vue.showModal(modal);
                                 vue.newObject = {
                                     status: 0,
@@ -244,11 +254,30 @@
                                 };
                             }
                         })
-                        .catch(function (error) {
+                        .catch((error) => {
+                            for (let field in error.response.data.errors) {
+                                this.error[field] = error.response.data.errors[field][0];
+                            };
                             console.log(error);
                         });
                 } else if (modal == 'edit') {
-                    axios.post('/api/edit', vue.currentPostamat)
+                    this.error = {};
+                    axios.post('/api/postamat/edit', vue.currentPostamat)
+                    .then(function(response) {
+                        if (response.data.status) {
+                            vue.cards = response.data.cards;
+                            vue.showModal(modal);
+                        }
+                    })
+                    .catch((error) => {
+                        for (let field in error.response.data.errors) {
+                            this.error[field] = error.response.data.errors[field][0];
+                        };
+                        console.log(error);
+                    });
+                } else if (modal == 'delete') {
+                    console.log(this.currentPostamat);
+                    axios.post('/api/postamat/delete', vue.currentPostamat)
                         .then(function (response) {
                             if (response.data.status) {
                                 vue.postamats = response.data.postamats;
@@ -258,20 +287,7 @@
                         .catch(function (error) {
                             console.log(error);
                         });
-                } 
-                else if (modal == 'delete') {
-                   console.log(this.currentPostamat);
-                    axios.post('/api/delete', vue.currentPostamat)
-                        .then(function (response) {
-                            if (response.data.status) {
-                                vue.postamats = response.data.postamats;
-                                vue.showModal(modal);
-                            }
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-               }
+                }
             }
         }
     }

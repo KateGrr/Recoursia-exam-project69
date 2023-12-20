@@ -4,21 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Postamat extends Model
+class PostamatSolution extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+
+    public function defectivePostamat()
+    {
+        return $this->belongsTo(DefectivePostamat::class, 'defective_id', 'id');
+    }
 
     protected $fillable = [
-        'status',
-        'system_id',
-        'address',
-        'serial_number'
+        'title',
+        'defective_id'
     ];
-
-    protected $guarded = ['id'];
 
     protected $casts = [
         'created_at' => 'datetime:d/m/Y, H:i',
