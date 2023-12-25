@@ -30,7 +30,10 @@
                         <div class="box">
                             <span>Postamat</span>
                             <h4>Grigoryeva Ekaterina</h4>
-                            <p>There are many variations of Lorem Ipsum available, but the majority have suffered alteration in some form</p>
+                            <p>
+                                Stage 1. made CRUD and Soft delete for Postamats<br>
+                                Stage 2. made CRUD and Connection for Themes, and Solutions<br>
+                            </p>
                         </div>
                     </div>
 

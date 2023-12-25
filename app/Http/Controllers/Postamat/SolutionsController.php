@@ -14,7 +14,7 @@ class SolutionsController extends Controller
 {
     public function index(): JsonResponse
     {
-        $solutions = PostamatSolution::with('defectivePostamat')->get();
+        $solutions = PostamatSolution::with('theme')->get();
 
         return response()->json([
             'status' => true,

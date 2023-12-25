@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DefectivePostamat extends Model
+class PostamatTheme extends Model
 {
     use HasFactory;
 
     public function solutions()
     {
-        return $this->hasMany(PostamatSolution::class, 'defective_id', 'id');
+        return $this->hasMany(PostamatSolution::class, 'theme_id', 'id');
     }
 
     protected $fillable = [

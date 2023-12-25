@@ -3,45 +3,45 @@
 namespace App\Http\Controllers\Postamat;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Postamat\DefectiveStoreRequest;
-use App\Http\Requests\Postamat\DefectiveUpdateRequest;
-use App\Models\DefectivePostamat;
+use App\Http\Requests\Postamat\ThemesStoreRequest;
+use App\Http\Requests\Postamat\ThemesUpdateRequest;
+use App\Models\PostamatTheme;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class DefectiveController extends Controller
+class ThemesController extends Controller
 {
     public function index(): JsonResponse
     {
-        $defectives = DefectivePostamat::all();
+        $themes = PostamatTheme::all();
 
         return response()->json([
             'status' => true,
             'message' => 'Success',
-            'defectives' => $defectives
+            'themes' => $themes
         ], 200);
     }
 
-    public function create(DefectiveStoreRequest $request): JsonResponse
+    public function create(ThemesStoreRequest $request): JsonResponse
     {
         $request = $request->validated();
 
-        $defectives = DefectivePostamat::create($request);
+        $themes = PostamatTheme::create($request);
 
-        $defectives = DefectivePostamat::all();
+        $themes = PostamatTheme::all();
 
         return response()->json([
             'status' => true,
             'message' => 'Success',
-            'defectives' => $defectives
+            'themes' => $themes
         ], 200);
     }
 
-    public function edit(DefectiveUpdateRequest $request): JsonResponse
+    public function edit(ThemesUpdateRequest $request): JsonResponse
     {
         $data = $request->validated();
 
-        DefectivePostamat::find($request->id)->update([
+        PostamatTheme::find($request->id)->update([
             'title' => $data['title'],
             'description' => $data['description']
         ]);
@@ -51,7 +51,7 @@ class DefectiveController extends Controller
 
     public function delete(Request $request): JsonResponse
     {
-        DefectivePostamat::find($request->id)->delete();
+        PostamatTheme::find($request->id)->delete();
 
         return $this->index();
     }

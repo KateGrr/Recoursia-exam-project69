@@ -57,7 +57,7 @@
                                 <router-link class="nav-link" to="/postamat/active">Active</router-link>
                             </li>
                             <li>
-                                <router-link class="nav-link" to="/postamat/defective">Defective</router-link>
+                                <router-link class="nav-link" to="/postamat/themes">Themes</router-link>
                             </li>
                             <li>
                                 <router-link class="nav-link" to="/postamat/solutions">Solutions</router-link>

@@ -244,7 +244,7 @@
                     axios.post('/api/postamat/create', vue.newObject)
                         .then(function (response) {
                             if (response.data.status) {
-                                vue.cards = response.data.cards;
+                                vue.postamats = response.data.postamats;
                                 vue.showModal(modal);
                                 vue.newObject = {
                                     status: 0,
@@ -265,7 +265,7 @@
                     axios.post('/api/postamat/edit', vue.currentPostamat)
                     .then(function(response) {
                         if (response.data.status) {
-                            vue.cards = response.data.cards;
+                            vue.postamats = response.data.postamats;
                             vue.showModal(modal);
                         }
                     })

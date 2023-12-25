@@ -9,14 +9,14 @@ class PostamatSolution extends Model
 {
     use HasFactory;
 
-    public function defectivePostamat()
+    public function theme()
     {
-        return $this->belongsTo(DefectivePostamat::class, 'defective_id', 'id');
+        return $this->belongsTo(PostamatTheme::class, 'theme_id', 'id');
     }
 
     protected $fillable = [
         'title',
-        'defective_id'
+        'theme_id'
     ];
 
     protected $casts = [

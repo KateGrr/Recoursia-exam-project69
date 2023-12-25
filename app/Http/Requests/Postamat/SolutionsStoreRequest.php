@@ -23,7 +23,7 @@ class SolutionsStoreRequest extends FormRequest
     {
         return [
             'title'     => 'required|max:50',
-            'defective_id' => 'required'
+            'theme_id' => 'required'
         ];
     }
 

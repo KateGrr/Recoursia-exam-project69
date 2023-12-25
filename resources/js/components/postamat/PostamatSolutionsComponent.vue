@@ -20,7 +20,7 @@
                 <tbody>
                     <tr v-for="(solution, key) of solutions" :key="key">
                         <td>{{ solution.id }}</td>
-                        <td>{{ solution.defective_postamat.title }}</td>
+                        <td>{{ solution.theme.title }}</td>
                         <td>{{ solution.title }}</td>
                         <td>{{ solution.created_at }}</td>
                         <td>{{ solution.updated_at }}</td>
@@ -44,16 +44,18 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
-                            <label for="theme_id" class="col-md-4 form-label">Select theme</label>
-                                <select class="form-select form-select col-md-8" id="theme_id" v-model="newObject.defective_id">
-                                    <option disabled selected value="">select theme</option>
-                                    <option v-for="defective in defectives" :value="defective.id">
-                                        {{  defective.title }}
-                                    </option>
-                                </select>         
+                            <label for="theme_title" class="col-md-4 form-label">Select theme</label>
+                                <div class="col-md-7">
+                                    <select class="form-select" id="theme_title" v-model="newObject.theme_id">
+                                        <option disabled selected value="">select theme</option>
+                                        <option v-for="theme in themes" :value="theme.id">
+                                            {{  theme.title }}
+                                        </option>
+                                    </select>
+                                </div>         
                         </div>
                     
-                        <div class="row row2">
+                        <div class="row row2 pt-4">
                             <label for="title" class="col-md-3 form-label">Title</label>
                             <div class="col-md-8">
                                 <textarea type="text" class="form-control textarea2" id="title" v-model="newObject.title"></textarea>
@@ -81,15 +83,17 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
-                            <label for="theme_id" class="col-md-4 form-label">Select theme</label>
-                                <select class="form-select form-select col-md-8" id="theme_id" v-model="currentSolution.defective_id">
-                                <option disabled selected v-for="defective in defectives" :value="defective.id">
-                                    {{  defective.title }}
-                                </option>
-                            </select>        
+                            <label for="theme_title" class="col-md-4 form-label">Select theme</label>
+                            <div class="col-md-7">
+                                <select class="form-select col-md-8" id="theme_title" v-model="currentSolution.theme_id">
+                                    <option disabled selected v-for="theme in themes" :value="theme.id">
+                                        {{  theme.title }}
+                                    </option>
+                                </select> 
+                            </div>            
                         </div>
                     
-                        <div class="row row2">
+                        <div class="row row2 pt-4">
                             <label for="title" class="col-md-3 form-label">Title</label>
                             <div class="col-md-8">
                                 <textarea type="text" class="form-control textarea2" id="title" v-model="currentSolution.title"></textarea>
@@ -143,12 +147,12 @@
         data() {
             return {
                 solutions: [],
-                defectives: [],
+                themes: [],
                 createModal: false,
                 editModal: false,
                 deleteModal: false,
                 newObject: {
-                    defective_id: null,
+                    theme_id: null,
                     title: null
                 },
                 currentSolution: {},
@@ -168,10 +172,10 @@
                     console.log(error);
                 });
 
-            axios.get('/api/postamat/defective/index')
+            axios.get('/api/postamat/themes/index')
                 .then(function (response) {
                     if (response.data.status) {
-                        vue.defectives = response.data.defectives;
+                        vue.themes = response.data.themes;
                     }
                 })
                 .catch(function (error) {
@@ -208,7 +212,7 @@
                                 vue.solutions = response.data.solutions;
                                 vue.showModal(modal);
                                 vue.newObject = {
-                                    defective_id: null,
+                                    theme_id: null,
                                     title: null
                                 };
                             }

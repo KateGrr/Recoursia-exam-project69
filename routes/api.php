@@ -3,7 +3,7 @@ use App\Http\Controllers\Cardomat\CardomatController;
 use App\Http\Controllers\Cardomat\CardomatThemeController;
 use App\Http\Controllers\Cardomat\CardomatSolutionsController;
 use App\Http\Controllers\Postamat\PostamatsController;
-use App\Http\Controllers\Postamat\DefectiveController;
+use App\Http\Controllers\Postamat\ThemesController;
 use App\Http\Controllers\Postamat\SolutionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -49,11 +49,11 @@ Route::controller(PostamatsController::class)->group(function() {
     Route::post('/postamat/restore', 'restore');
 });
 
-Route::controller(DefectiveController::class)->group(function() {
-    Route::get('/postamat/defective/index', 'index');
-    Route::post('/postamat/defective/create', 'create');
-    Route::post('/postamat/defective/edit', 'edit');
-    Route::post('/postamat/defective/delete', 'delete');
+Route::controller(ThemesController::class)->group(function() {
+    Route::get('/postamat/themes/index', 'index');
+    Route::post('/postamat/themes/create', 'create');
+    Route::post('/postamat/themes/edit', 'edit');
+    Route::post('/postamat/themes/delete', 'delete');
 });
 
 Route::controller(SolutionsController::class)->group(function() {

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Postamat;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DefectiveUpdateRequest extends FormRequest
+class ThemesStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

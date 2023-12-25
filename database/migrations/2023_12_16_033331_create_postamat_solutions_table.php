@@ -18,9 +18,9 @@ return new class extends Migration
 
             $table->softDeletes();
 
-            $table->index('defective_id');
-            $table->foreignId('defective_id')
-                  ->constrained('defective_postamats')
+            $table->index('theme_id');
+            $table->foreignId('theme_id')
+                  ->constrained('postamat_themes')
                   ->cascadeOnDelete()
                   ->cascadeOnUpdate();
         });

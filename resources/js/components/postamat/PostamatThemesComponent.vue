@@ -18,16 +18,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(defective, key) of defectives" :key="key">
-                        <td>{{ defective.id }}</td>
-                        <td>{{ defective.title }}</td>
-                        <td>{{ defective.description }}</td>
-                        <td>{{ defective.created_at }}</td>
-                        <td>{{ defective.updated_at }}</td>
+                    <tr v-for="(theme, key) of themes" :key="key">
+                        <td>{{ theme.id }}</td>
+                        <td>{{ theme.title }}</td>
+                        <td>{{ theme.description }}</td>
+                        <td>{{ theme.created_at }}</td>
+                        <td>{{ theme.updated_at }}</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('edit', defective)"> <i
+                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('edit', theme)"> <i
                                     class="fa-regular fa-pen-to-square"></i></button>
-                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('delete', defective)"><i
+                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('delete', theme)"><i
                                     class="fas fa-trash"></i></button>
                         </td>
                     </tr>
@@ -78,7 +78,7 @@
                     <div class="row mt-4">
                         <label for="title" class="col-sm-4 col-form-label fs-5">Title</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="title" v-model="currentDefective.title">
+                            <input type="text" class="form-control" id="title" v-model="currentTheme.title">
                             <div class="row-sm-4 text-danger" > {{ error.title }} </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                     <div class="row mt-4 mb-4">
                         <label for="description" class="col-sm-4 col-form-label fs-5">Description</label>
                         <div class="col-sm-8">
-                            <textarea type="text" class="form-control textarea1" id="description" v-model="currentDefective.description"></textarea>
+                            <textarea type="text" class="form-control textarea1" id="description" v-model="currentTheme.description"></textarea>
                             <div class="row-sm-4 text-danger" > {{ error.description }} </div>
                         </div>
                     </div>
@@ -135,7 +135,7 @@
 
         data() {
             return {
-                defectives: [],
+                themes: [],
                 createModal: false,
                 editModal: false,
                 deleteModal: false,
@@ -144,17 +144,17 @@
                     title: null,
                     description: null
                 },
-                currentDefective: {},
+                currentTheme: {},
                 error: {}
             };
         },
 
         mounted() {
             let vue = this;
-            axios.get('/api/postamat/defective/index')
+            axios.get('/api/postamat/themes/index')
                 .then(function (response) {
                     if (response.data.status) {
-                        vue.defectives = response.data.defectives;
+                        vue.themes = response.data.themes;
                     }
                 })
                 .catch(function (error) {
@@ -163,18 +163,18 @@
         },
 
         methods: {
-            showModal: function (modal, defective = null) {
+            showModal: function (modal, theme = null) {
                 if (modal == 'create') {
                     this.createModal = !this.createModal;
                 } else if (modal == 'edit') {
                     this.editModal = !this.editModal;
-                    if (defective != null) {
-                        this.currentDefective = defective;
+                    if (theme != null) {
+                        this.currentTheme = theme;
                     }
                 } else if (modal == 'delete') {
                     this.deleteModal = !this.deleteModal;
-                    if (defective != null) {
-                        this.currentDefective = defective;
+                    if (theme != null) {
+                        this.currentTheme = theme;
                     }
                 }
             },
@@ -185,10 +185,10 @@
                 let vue = this;
                 if (modal == 'create') {
                     this.error = {};
-                    axios.post('/api/postamat/defective/create', vue.newObject)
+                    axios.post('/api/postamat/themes/create', vue.newObject)
                         .then(function (response) {
                             if (response.data.status) {
-                                vue.defectives = response.data.defectives;
+                                vue.themes = response.data.themes;
                                 vue.showModal(modal);
                                 vue.newObject = {
                                     status: 0,
@@ -205,10 +205,10 @@
                         });
                 } else if (modal == 'edit') {
                     this.error = {};
-                    axios.post('/api/postamat/defective/edit', vue.currentDefective)
+                    axios.post('/api/postamat/themes/edit', vue.currentTheme)
                         .then(function (response) {
                             if (response.data.status) {
-                                vue.defectives = response.data.defectives;
+                                vue.themes = response.data.themes;
                                 vue.showModal(modal);
                             }
                         })
@@ -219,11 +219,11 @@
                             console.log(error);
                         });
                 } else if (modal == 'delete') {
-                    console.log(this.currentDefective);
-                    axios.post('/api/postamat/defective/delete', vue.currentDefective)
+                    console.log(this.currentTheme);
+                    axios.post('/api/postamat/themes/delete', vue.currentTheme)
                         .then(function (response) {
                             if (response.data.status) {
-                                vue.defectives = response.data.defectives;
+                                vue.themes = response.data.themes;
                                 vue.showModal(modal);
                             }
                         })

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('defective_postamats', function (Blueprint $table) {
+        Schema::create('postamat_themes', function (Blueprint $table) {
             $table->id();
             $table->boolean('active')->default(true);
             $table->string('title', 50)->nullable();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('defective_postamats');
+        Schema::dropIfExists('postamat_themes');
     }
 };

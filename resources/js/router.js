@@ -14,7 +14,7 @@ import HomeComponent from './components/home/HomeComponent.vue';
 // import TerminalDeletedComponent from './components/terminal/TerminalDeletedComponent.vue';
 
 import PostamatActiveComponent from './components/postamat/PostamatActiveComponent.vue';
-import PostamatDefectiveComponent from './components/postamat/PostamatDefectiveComponent.vue';
+import PostamatThemesComponent from './components/postamat/PostamatThemesComponent.vue';
 import PostamatSolutionsComponent from './components/postamat/PostamatSolutionsComponent.vue';
 import PostamatDeletedComponent from './components/postamat/PostamatDeletedComponent.vue';
 
@@ -44,7 +44,7 @@ export default createRouter({
         // { path: '/terminal/deleted',   component: TerminalDeletedComponent,   meta:{aHref:'terminal',title:'Terminal Deleted'}},
 
         { path: '/postamat/active',    component: PostamatActiveComponent,    meta:{aHref:'postamat',title:'Postamat Active'}},
-        { path: '/postamat/defective', component: PostamatDefectiveComponent, meta:{aHref:'postamat',title:'Postamat Defective'}},
+        { path: '/postamat/themes', component: PostamatThemesComponent, meta:{aHref:'postamat',title:'Postamat Themes'}},
         { path: '/postamat/solutions', component: PostamatSolutionsComponent, meta:{aHref:'postamat',title:'Postamat Solutions'}},
         { path: '/postamat/deleted',   component: PostamatDeletedComponent,   meta:{aHref:'postamat',title:'Postamat Deleted'}},
 
