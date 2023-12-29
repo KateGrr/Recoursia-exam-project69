@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Postamat;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Postamat\SolutionsStoreRequest;
 use App\Http\Requests\Postamat\SolutionsUpdateRequest;
-use App\Models\DefectivePostamat;
 use App\Models\PostamatSolution;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -37,7 +36,7 @@ class SolutionsController extends Controller
         $data = $request->validated();
 
         PostamatSolution::find($request->id)->update([
-            'defective_id' => $data['defective_id'],
+            'theme_id' => $data['theme_id'],
             'title' => $data['title']
         ]);
 

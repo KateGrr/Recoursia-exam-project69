@@ -17,6 +17,7 @@ import PostamatActiveComponent from './components/postamat/PostamatActiveCompone
 import PostamatThemesComponent from './components/postamat/PostamatThemesComponent.vue';
 import PostamatSolutionsComponent from './components/postamat/PostamatSolutionsComponent.vue';
 import PostamatDeletedComponent from './components/postamat/PostamatDeletedComponent.vue';
+import PostamatRequestsComponent from './components/postamat/PostamatRequestsComponent.vue';
 
 import PosterminalActiveComponent from './components/posterminal/PosterminalActiveComponent.vue';
 import PosterminalDefectiveComponent from './components/posterminal/PosterminalDefectiveComponent.vue';
@@ -47,6 +48,7 @@ export default createRouter({
         { path: '/postamat/themes', component: PostamatThemesComponent, meta:{aHref:'postamat',title:'Postamat Themes'}},
         { path: '/postamat/solutions', component: PostamatSolutionsComponent, meta:{aHref:'postamat',title:'Postamat Solutions'}},
         { path: '/postamat/deleted',   component: PostamatDeletedComponent,   meta:{aHref:'postamat',title:'Postamat Deleted'}},
+        { path: '/postamat/requests',   component: PostamatRequestsComponent,   meta:{aHref:'postamat',title:'Postamat Requests'}},
 
         { path: '/posterminal/active',    component: PosterminalActiveComponent,    meta:{aHref:'posterminal',title:'Posterminal Active'}},
         { path: '/posterminal/defective', component: PosterminalDefectiveComponent, meta:{aHref:'posterminal',title:'Posterminal Defective'}},

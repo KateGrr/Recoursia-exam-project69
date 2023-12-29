@@ -11,6 +11,11 @@ class Postamat extends Model
     use HasFactory;
     use SoftDeletes;
 
+    public function requests()
+    {
+        return $this->hasMany(PostamatRequest::class, 'postamat_id', 'id');
+    }
+
     protected $fillable = [
         'status',
         'system_id',

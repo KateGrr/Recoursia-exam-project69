@@ -5,6 +5,7 @@ use App\Http\Controllers\Cardomat\CardomatSolutionsController;
 use App\Http\Controllers\Postamat\PostamatsController;
 use App\Http\Controllers\Postamat\ThemesController;
 use App\Http\Controllers\Postamat\SolutionsController;
+use App\Http\Controllers\Postamat\RequestsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -61,6 +62,12 @@ Route::controller(SolutionsController::class)->group(function() {
     Route::post('/postamat/solutions/create', 'create');
     Route::post('/postamat/solutions/edit', 'edit');
     Route::post('/postamat/solutions/delete', 'delete');
+});
+
+Route::controller(RequestsController::class)->group(function() {
+    Route::get('/postamat/requests/index', 'index');
+    Route::post('/postamat/requests/create', 'create');
+    Route::get('/postamat/requests/{request}/edit', 'edit');
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Posterminal'], function() {

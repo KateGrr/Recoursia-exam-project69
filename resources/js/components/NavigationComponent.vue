@@ -65,6 +65,9 @@
                             <li>
                                 <router-link class="nav-link" to="/postamat/deleted">Deleted Postamat</router-link>
                             </li>
+                            <li>
+                                <router-link class="nav-link" to="/postamat/requests">Requests</router-link>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

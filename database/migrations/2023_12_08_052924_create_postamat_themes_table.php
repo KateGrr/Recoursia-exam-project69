@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('postamat_themes', function (Blueprint $table) {
             $table->id();
-            $table->boolean('active')->default(true);
             $table->string('title', 50)->nullable();
             $table->string('description', 255)->nullable();
             $table->timestamps();

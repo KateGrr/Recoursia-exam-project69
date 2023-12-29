@@ -14,6 +14,11 @@ class PostamatSolution extends Model
         return $this->belongsTo(PostamatTheme::class, 'theme_id', 'id');
     }
 
+    public function request()
+    {
+        return $this->belongsTo(PostamatRequest::class, 'theme_id');
+    }
+
     protected $fillable = [
         'title',
         'theme_id'
