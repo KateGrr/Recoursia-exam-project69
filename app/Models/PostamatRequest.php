@@ -9,6 +9,12 @@ class PostamatRequest extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'id', 
+        'created_at', 
+        'updated_at'
+    ];
+
     public function postamat()
     {
         return $this->belongsTo(Postamat::class, 'postamat_id', 'id');
@@ -16,20 +22,13 @@ class PostamatRequest extends Model
 
     public function theme()
     {
-        return $this->hasOne(PostamatTheme::class, 'theme_id');
+        return $this->belongsTo(PostamatTheme::class, 'theme_id', 'id');
     }
 
     public function solution()
     {
-        return $this->hasOne(PostamatSolution::class, 'solution_id');
+        return $this->belongsTo(PostamatSolution::class, 'solution_id', 'id');
     }
-
-    protected $fillable = [
-        'status',
-        'postamat_id',
-        'theme_id',
-        'solution_id'
-    ];
 
     protected $casts = [
         'created_at' => 'datetime:d/m/Y, H:i',

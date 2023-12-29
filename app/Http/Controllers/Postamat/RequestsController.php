@@ -11,7 +11,7 @@ class RequestsController extends Controller
 {
     public function index(): JsonResponse
     {
-        $requests = PostamatRequest::with('postamat_id', 'theme_id', 'solution_id')->get();
+        $requests = PostamatRequest::with('postamat', 'theme', 'solution')->get();
 
         return response()->json([
             'status' => true,
@@ -22,7 +22,12 @@ class RequestsController extends Controller
 
     public function create(Request $request): JsonResponse
     {
-        PostamatRequest::create($request);
+        PostamatRequest::create([
+            'status' => $request->status,
+            'postamat_id' => $request->postamat_id,
+            'theme_id' => $request->theme_id,
+            'solution_id' => $request->solution_id,
+        ]);
         
         return $this->index();
     }

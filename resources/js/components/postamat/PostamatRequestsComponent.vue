@@ -22,16 +22,16 @@
                 <tbody>
                     <tr v-for="(request, key) of requests" :key="key">
                         <td>{{ request.id }}</td>
-                        <td :class= "'fw-bold'+(request.status == '0'? 'text-success':'1'? 'text-warning':'2'? 'text-primary': 'text-danger')">
-                            {{ request.status == '0'? 'Open':'1'?'InWork':'2'?'Closed': 'Canceled' }}
+                        <td :class= "'fw-bold '+(request.status == 0 ? 'text-success': 1 ? 'text-warning': 2 ? 'text-primary': 'text-danger')">
+                            {{ request.status == 0 ? 'OPENED': 1 ?'IN WORK': 2 ? 'CLOSED' : 'CANCELED' }}
                         </td>
                         <td>{{ request.postamat.system_id }}</td>
                         <td>{{ request.theme.title }}</td>
-                        <td>{{ request.solution.title }}</td>
+                        <td>{{ request.solution == null ? 'unassigned' : request.solution.title }}</td>
                         <td>{{ request.created_at }}</td>
                         <td>{{ request.updated_at }}</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('edit', postamat)"> <i
+                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('edit', request)"> <i
                                     class="fa-regular fa-pen-to-square"></i></button>
                         </td>
                     </tr>
@@ -53,7 +53,7 @@
                                 <select class="form-select" id="postamat_system_id" v-model="newObject.postamat_id">
                                     <option disabled selected value="">select postamat</option>
                                     <option v-for="postamat in postamats" :value="postamat.id">
-                                        {{  postamat.title }}
+                                        {{  postamat.system_id }}
                                     </option>
                                 </select>
                             </div>         

@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('postamat_requests', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(0);
 
             $table->index('postamat_id');
             $table->index('theme_id');
             $table->index('solution_id');
             $table->foreignId('postamat_id')->constrained('postamats');
             $table->foreignId('theme_id')->constrained('postamat_themes');
-            $table->foreignId('solution_id')->constrained('postamat_solutions');
+            $table->foreignId('solution_id')->nullable()->constrained('postamat_solutions');
 
             $table->timestamps();
             $table->softDeletes();
