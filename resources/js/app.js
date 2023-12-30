@@ -4,20 +4,30 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import './bootstrap';
-import { createApp } from 'vue';
-
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
  * to use in your application's views. An example is included for you.
- */
+*/
+import './bootstrap';
+import { createApp } from 'vue';
+import NavigationComponent from './components/NavigationComponent.vue';
+import router from './router';
+const app = createApp(NavigationComponent);
+router.beforeEach((to, from, next) => {
+    let selectorAFrom = document.querySelector(`a[href="${from.meta.aHref}"]`);
+    let selectorATo = document.querySelector(`a[href="${to.meta.aHref}"]`);
+    if (selectorATo) {
+        selectorATo.classList.add('nav-btn-active');
+    } if (selectorAFrom && selectorAFrom != selectorATo) {
+        selectorAFrom.classList.remove('nav-btn-active');
+    }
+    document.title = to.meta.title || 'Recoursia 69';
+    next();
+});
+app.use(router);
 
-const app = createApp({});
-
-import ExampleComponent from './components/ExampleComponent.vue';
-app.component('example-component', ExampleComponent);
-
+app.mount('#app');
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -35,5 +45,3 @@ app.component('example-component', ExampleComponent);
  * an "id" attribute of "app". This element is included with the "auth"
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
-
-app.mount('#app');

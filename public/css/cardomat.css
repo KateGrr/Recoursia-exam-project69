@@ -1,0 +1,18 @@
+.status-cell {
+    font-weight: bold;
+}
+.status-cell[data-status="0"] {
+    color: green;
+}
+
+.status-cell[data-status="1"] {
+    color: blue;
+}
+
+.status-cell[data-status="2"] {
+    color: red;
+}
+
+.status-cell[data-status="3"] {
+    color: gray;
+}
