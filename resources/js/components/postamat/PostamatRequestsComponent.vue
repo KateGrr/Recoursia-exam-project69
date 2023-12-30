@@ -1,12 +1,12 @@
 <template>
-    <h1 class="h1">Postamat requests</h1>
+    <h2 class="h2">Postamat requests</h2>
     <main class="mt-4 d-flex flex-column align-items-center">
-        <div class="col-sm-12">
-            <table class="table">
+        <div>
+            <table class="table w-auto">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col" class="col-sm">ID</th>
-                        <th scope="col" class="col-sm">Status</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Postamat</th>
                         <th scope="col">Theme</th>
                         <th scope="col">Solution</th>
@@ -22,8 +22,8 @@
                 <tbody>
                     <tr v-for="(request, key) of requests" :key="key">
                         <td>{{ request.id }}</td>
-                        <td :class= "'fw-bold '+(request.status == 0 ? 'text-success': 1 ? 'text-warning': 2 ? 'text-primary': 'text-danger')">
-                            {{ request.status == 0 ? 'OPENED': 1 ?'IN WORK': 2 ? 'CLOSED' : 'CANCELED' }}
+                        <td :class= "'fw-bold '+(request.status == 0 ? 'text-success': request.status == 1 ? 'text-warning': request.status == 2 ? 'text-primary': 'text-danger')">
+                            {{ request.status == 0 ? 'OPENED': request.status == 1 ? 'IN WORK': request.status == 2 ? 'CLOSED' : 'CANCELED' }}
                         </td>
                         <td>{{ request.postamat.system_id }}</td>
                         <td>{{ request.theme.title }}</td>
@@ -178,8 +178,8 @@
 
         </MDBModalBody>
         <MDBModalFooter>
-            <MDBBtn color="secondary" @click="showModal('update')">Cancel</MDBBtn>
-            <MDBBtn color="primary" @click="save('update')">Close request</MDBBtn>
+            <MDBBtn color="secondary" @click="showModal('close')">Cancel</MDBBtn>
+            <MDBBtn color="primary" @click="save('close')">Close request</MDBBtn>
         </MDBModalFooter>
     </MDBModal>
     
@@ -254,6 +254,8 @@
                 themes: [],
                 createModal: false,
                 updateModal: false,
+                cancelModal: false,
+                closeModal: false,
                 newObject: {
                     status: 0,
                     postamat_id: null,
@@ -329,7 +331,6 @@
             save: function (modal) {
                 let vue = this;
                 if (modal == 'create') {
-                    this.error = {};
                     axios.post('/api/postamat/requests/create', vue.newObject)
                         .then(function (response) {
                             if (response.data.status) {
@@ -347,39 +348,36 @@
                             console.log(error);
                         });
                 } else if (modal == 'update') {
-                    this.error = {};
+                    vue.currentRequest.status = 1;
                     axios.post('/api/postamat/requests/update', vue.currentRequest)
                     .then(function(response) {
                         if (response.data.status) {
                             vue.requests = response.data.requests;
                             vue.showModal(modal);
-                            vue.currentRequest.status = 1;
                         }
                     })
                     .catch((error) => {
                         console.log(error);
                     });
                 } else if (modal == 'close') {
-                    this.error = {};
+                    vue.currentRequest.status = 2;
                     axios.post('/api/postamat/requests/update', vue.currentRequest)
                     .then(function(response) {
                         if (response.data.status) {
                             vue.requests = response.data.requests;
                             vue.showModal(modal);
-                            vue.currentRequest.status = 2;
                         }
                     })
                     .catch((error) => {
                         console.log(error);
                     });
                 } else if (modal == 'cancel') {
-                    this.error = {};
+                    vue.currentRequest.status = 3;
                     axios.post('/api/postamat/requests/update', vue.currentRequest)
                     .then(function(response) {
                         if (response.data.status) {
                             vue.requests = response.data.requests;
                             vue.showModal(modal);
-                            vue.currentRequest.status = 3;
                         }
                     })
                     .catch((error) => {

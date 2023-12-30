@@ -1,5 +1,5 @@
 <template>
-    <h1 class="h1">Deleted postamats</h1>
+    <h2 class="h2">Deleted postamats</h2>
     <main class="mt-4 d-flex flex-column align-items-center">
         <div class="col-sm-12">
             <table class="table">
@@ -101,7 +101,6 @@
             confirm: function (modal) {
                 let vue = this;
                 if (modal == 'restore') {
-                    console.log(this.currentDeletedPostamat);
                     axios.post(`/api/postamat/restore`, vue.currentDeletedPostamat)
                     .then((response) => {
                         if (response.data.status) {

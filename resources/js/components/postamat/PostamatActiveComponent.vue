@@ -1,5 +1,5 @@
 <template>
-    <h1 class="h1">Active postamats</h1>
+    <h2 class="h2">Active postamats</h2>
     <main class="mt-4 d-flex flex-column align-items-center">
         <div class="col-sm-12">
             <table class="table">
@@ -260,7 +260,6 @@
                             for (let field in error.response.data.errors) {
                                 this.error[field] = error.response.data.errors[field][0];
                             };
-                            console.log(error);
                         });
                 } else if (modal == 'edit') {
                     this.error = {};
@@ -275,10 +274,8 @@
                         for (let field in error.response.data.errors) {
                             this.error[field] = error.response.data.errors[field][0];
                         };
-                        console.log(error);
                     });
                 } else if (modal == 'delete') {
-                    console.log(this.currentPostamat);
                     axios.post('/api/postamat/delete', vue.currentPostamat)
                         .then(function (response) {
                             if (response.data.status) {
