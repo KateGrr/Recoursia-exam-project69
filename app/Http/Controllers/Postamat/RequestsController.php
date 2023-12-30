@@ -31,4 +31,14 @@ class RequestsController extends Controller
         
         return $this->index();
     }
+
+    public function update(Request $data): JsonResponse
+    {
+        PostamatRequest::find($data->id)->update([
+            'status' => $data->status,
+            'solution_id' => $data->solution_id,
+        ]);
+
+        return $this->index();
+    }
 }

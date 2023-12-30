@@ -67,7 +67,7 @@ Route::controller(SolutionsController::class)->group(function() {
 Route::controller(RequestsController::class)->group(function() {
     Route::get('/postamat/requests/index', 'index');
     Route::post('/postamat/requests/create', 'create');
-    Route::get('/postamat/requests/{request}/edit', 'edit');
+    Route::post('/postamat/requests/update', 'update');
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Posterminal'], function() {

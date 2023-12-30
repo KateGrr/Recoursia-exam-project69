@@ -25,7 +25,7 @@
                         <td>{{ theme.created_at }}</td>
                         <td>{{ theme.updated_at }}</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('edit', theme)"> <i
+                            <button type="button" class="btn btn-sm btn-dark me-2" @click="showModal('edit', theme)"> <i
                                     class="fa-regular fa-pen-to-square"></i></button>
                             <button type="button" class="btn btn-sm btn-dark" @click="showModal('delete', theme)"><i
                                     class="fas fa-trash"></i></button>

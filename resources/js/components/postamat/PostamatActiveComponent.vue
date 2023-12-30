@@ -22,14 +22,16 @@
                 <tbody>
                     <tr v-for="(postamat, key) of postamats" :key="key">
                         <td>{{ postamat.id }}</td>
-                        <td>{{ postamat.status }}</td>
+                        <td :class= "'fw-bold '+(postamat.status == 1 ? 'text-success': 'text-warning')">
+                            {{ postamat.status == 1 ? 'ON': 'OFF' }}
+                        </td>
                         <td>{{ postamat.system_id }}</td>
                         <td>{{ postamat.address }}</td>
                         <td>{{ postamat.serial_number }}</td>
                         <td>{{ postamat.created_at }}</td>
                         <td>{{ postamat.updated_at }}</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-dark" @click="showModal('edit', postamat)"> <i
+                            <button type="button" class="btn btn-sm btn-dark me-2" @click="showModal('edit', postamat)"> <i
                                     class="fa-regular fa-pen-to-square"></i></button>
                             <button type="button" class="btn btn-sm btn-dark" @click="showModal('delete', postamat)"><i
                                     class="fas fa-trash"></i></button>
