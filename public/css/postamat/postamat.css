@@ -1,0 +1,16 @@
+.h1 {
+    font-size: 16px;
+    margin: 20px 0px 0px 20px;
+}
+
+.textarea1 {
+    height: 250px;
+}
+
+.textarea2 {
+    height: 100px;
+}
+
+.form-select {
+    width: auto;
+}
